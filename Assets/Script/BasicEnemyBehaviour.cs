@@ -5,17 +5,22 @@ using UnityEngine;
 public class BasicEnemyBehaviour : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
-    //[SerializeField] private Transform carrotTransform;
+    [SerializeField] private Transform playerTransform;
     [SerializeField] private GameObject enemy;
+    [SerializeField] private GameObject attack;
 
     public List<Transform> waypoints;
 
     public Vector2 checkPoint = Vector2.zero;
     public int nextPoints = 0;
     int pointChangeValue = 1;
-    private float movementSpeed = 3;
-    //public float chaseDistance = 10;
-    //public bool isEnranged = false;
+    private float movementSpeed = 3f;
+    public float chaseDistance = 7f;
+    public float attackDistance = 2f;
+    public float attackSpeed = 1f;
+    public float attackDowntime = 2f;
+    public bool isChasing = false;
+    public bool isAttacking = false;
 
     public void Start()
     {
@@ -25,7 +30,25 @@ public class BasicEnemyBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoveToNextPoint();
+        if(!isAttacking)
+        {
+            if (isChasing)
+            {
+                if (Vector2.Distance(transform.position, playerTransform.position) >= chaseDistance)
+                {
+                    isChasing = false;
+                }
+                Chase();
+            }
+            else
+            {
+                if (Vector2.Distance(transform.position, playerTransform.position) < chaseDistance)
+                {
+                    isChasing = true;
+                }
+                MoveToNextPoint();
+            }
+        }
     }
 
     void MoveToNextPoint()
@@ -49,24 +72,37 @@ public class BasicEnemyBehaviour : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    void Chase()
     {
-        if (col.gameObject.tag == "Player")
+        if (Vector2.Distance(transform.position, playerTransform.position) <= attackDistance)
         {
-            Info_Player.deaths++;
-            Info_Player.death_enemy2++;
-            //col.gameObject.GetComponent<Death>().Reincarnate();
+            isAttacking = true;
+            StartCoroutine(DoAttack());
         }
+        if (rb.transform.position.x > playerTransform.position.x)
+        {
+            rb.transform.localScale = new Vector3(1, 1, 1);
+            rb.transform.position += Vector3.left * movementSpeed * Time.deltaTime;
+        }
+        if (rb.transform.position.x < playerTransform.position.x)
+        {
+            rb.transform.localScale = new Vector3(-1, 1, 1);
+            rb.transform.position += Vector3.right * movementSpeed * Time.deltaTime;
+        }
+    }
+
+    IEnumerator DoAttack()
+    {
+        attack.SetActive(true);
+        attack.GetComponent<Animator>().SetFloat("attackSpeed", attackSpeed);
+        yield return new WaitForSeconds(attackDowntime);
+        attack.SetActive(false);
+        isAttacking = false;
     }
 
     void OnDeath()
     {
         rb.transform.position = checkPoint;
-    }
-
-    void OnDestroy()
-    {
-        //EventSystem.current.onDeath -= OnDeath;
     }
 
 }
