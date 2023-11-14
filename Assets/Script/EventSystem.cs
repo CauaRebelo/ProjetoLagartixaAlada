@@ -12,6 +12,16 @@ public class EventSystem : MonoBehaviour
         current = this;
     }
 
+    public event Action onPlayerDamage;
+    public void PlayerDamage()
+    {
+        if (onPlayerDamage != null)
+        {
+            onPlayerDamage();
+
+        }
+    }
+
     public event Action onDeath;
     public void Death()
     {

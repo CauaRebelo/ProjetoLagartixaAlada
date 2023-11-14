@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static class Info_Player
 {
+    private static int p_health = 3;
+    private static bool p_iframe = false;
     private static int p_extra = 0;
     private static int p_deaths = 0;
     private static int p_jumps = 0;
@@ -12,6 +14,18 @@ public static class Info_Player
     private static int p_death_enemy2 = 0;
     private static int p_death_projectile1 = 0;
     private static int p_death_projectile2 = 0;
+
+    public static int health
+    {
+        get { return p_health; }
+        set { p_health = value; }
+    }
+
+    public static bool iframe
+    {
+        get { return p_iframe; }
+        set { p_iframe = value; }
+    }
 
     public static int extra
     {
