@@ -83,10 +83,12 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
+        Physics2D.IgnoreLayerCollision(11, 15, true);
         rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
         trail.emitting = true;
         yield return new WaitForSeconds(dashingTime);
         trail.emitting = false;
+        Physics2D.IgnoreLayerCollision(11, 15, false);
         rb.gravityScale = originalGravity;
         isDashing = false;
         yield return new WaitForSeconds(dashingCooldown);
