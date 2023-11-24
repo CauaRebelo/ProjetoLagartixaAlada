@@ -30,24 +30,4 @@ public class EventSystem : MonoBehaviour
             onDeath();
         }
     }
-
-    public event Action onPickupCarrot;
-    public void PickupCarrot()
-    {
-        if (onPickupCarrot != null)
-        {
-            onPickupCarrot();
-
-        }
-    }
-
-    public event Action onForceDeath;
-    public void ForceDeath()
-    {
-        if (onForceDeath != null)
-        {
-            onForceDeath();
-
-        }
-    }
 }

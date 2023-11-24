@@ -6,6 +6,7 @@ public static class Info_Player
 {
     private static int p_health = 3;
     private static bool p_iframe = false;
+    private static int p_enchantment = 0;
     private static int p_extra = 0;
     private static int p_deaths = 0;
     private static int p_jumps = 0;
@@ -25,6 +26,12 @@ public static class Info_Player
     {
         get { return p_iframe; }
         set { p_iframe = value; }
+    }
+
+    public static int enchantment
+    {
+        get { return p_enchantment; }
+        set { p_enchantment = value; }
     }
 
     public static int extra

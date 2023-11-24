@@ -24,7 +24,7 @@ public class BasicEnemyBehaviour : MonoBehaviour
 
     public void Start()
     {
-        //EventSystem.current.onDeath += OnDeath;
+        EventSystem.current.onDeath += OnDeath;
     }
 
     // Update is called once per frame
@@ -102,7 +102,9 @@ public class BasicEnemyBehaviour : MonoBehaviour
 
     void OnDeath()
     {
-        rb.transform.position = checkPoint;
+        StopAllCoroutines();
+        attack.SetActive(false);
+        isAttacking = false;
     }
 
 }
