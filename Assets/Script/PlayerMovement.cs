@@ -55,17 +55,17 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
 
-        if(Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        if(Input.GetButtonDown("Fire2") && canDash)
         {
             StartCoroutine(Dash());
         }
 
-        if (Input.GetKeyDown(KeyCode.Z) && canAttack)
+        if (Input.GetButtonDown("Fire1") && canAttack)
         {
             StartCoroutine(Attack());
         }
 
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetButtonDown("Fire3"))
         {
             Info_Player.enchantment = (Info_Player.enchantment + 1) % maxEnchantment;
             ChangeColor();

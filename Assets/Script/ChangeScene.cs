@@ -12,4 +12,9 @@ public class ChangeScene : MonoBehaviour
     {
         SceneManager.LoadScene("SampleScene");
     }
+
+    public void loadSceneFase3()
+    {
+        SceneManager.LoadScene("TesteInimigoSemAI");
+    }
 }
