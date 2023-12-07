@@ -10,9 +10,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject normalAttack;
     [SerializeField] private TrailRenderer trail;
     [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private PlayerDamage playerDamage;
 
+    public int enchantment;
     private int maxEnchantment;
+    public float damage= 1f;
 
+    private bool canMove = true;
     private float horizontal;
     private float speed = 8f;
     private float jumpingPower = 20f;
@@ -23,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator attackAnim;
 
     private bool canDash = true;
-    private bool isAbleToAct = true;
+    public bool isAbleToAct = true;
     private float dashingPower = 24f;
     private float dashingTime = 0.2f;
     private float dashingCooldown = 0.7f;
@@ -31,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     public void Start()
     {
         //EventSystem.current.onPlayerDamage += OnPlayerDamage;
+
         maxEnchantment = 4;
         attackAnim = normalAttack.GetComponent<Animator>();
     }
@@ -53,6 +58,11 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            if (canAttack == false)
+            {
+                normalAttack.SetActive(false);
+                canAttack = true;
+            }
         }
 
         if(Input.GetButtonDown("Fire2") && canDash)
@@ -67,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Fire3"))
         {
-            Info_Player.enchantment = (Info_Player.enchantment + 1) % maxEnchantment;
+            enchantment = (enchantment + 1) % maxEnchantment;
             ChangeColor();
         }
 
@@ -80,7 +90,11 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
-        rb.velocity = new Vector2(horizontal* speed, rb.velocity.y);
+
+        if (canMove)
+        {
+            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        }
     }
 
     private bool isGrounded()
@@ -90,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Flip()
     {
-        if(isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
+        if((isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f) && canMove)
         {
             isFacingRight = !isFacingRight;
             Vector3 localScale = transform.localScale;
@@ -101,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void ChangeColor()
     {
-        switch (Info_Player.enchantment)
+        switch (enchantment)
         {
             case 0:
                 sprite.color = Color.white;
@@ -122,14 +136,19 @@ public class PlayerMovement : MonoBehaviour
     {
         canDash = false;
         isAbleToAct = false;
-        Info_Player.iframe = true;
+        playerDamage.iframe = true;
+        if(canAttack == false)
+        {
+            normalAttack.SetActive(false);
+            canAttack = true;
+        }
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         Physics2D.IgnoreLayerCollision(11, 15, true);
         rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
         trail.emitting = true;
         yield return new WaitForSeconds(dashingTime);
-        Info_Player.iframe = false;
+        playerDamage.iframe = false;
         trail.emitting = false;
         Physics2D.IgnoreLayerCollision(11, 15, false);
         rb.gravityScale = originalGravity;
@@ -142,12 +161,18 @@ public class PlayerMovement : MonoBehaviour
     {
         canAttack = false;
         isAbleToAct = false;
+        canMove = false;
+        if (canDash == false)
+        {
+            playerDamage.iframe = false;
+        }
         rb.velocity = Vector2.zero;
         normalAttack.SetActive(true);
         attackAnim.Play("NormalSwing");
         yield return new WaitForSeconds(attackCooldown);
         normalAttack.SetActive(false);
         isAbleToAct = true;
+        canMove = true;
         canAttack = true;
     }
 }

@@ -113,6 +113,9 @@ MonoBehaviour:
   normalAttack: {fileID: 635471722457752279}
   trail: {fileID: 7946973078212381959}
   sprite: {fileID: 1687487685553306311}
+  playerDamage: {fileID: 1659471982433229672}
+  enchantment: 0
+  damage: 1
 --- !u!50 &1798016566394195152
 Rigidbody2D:
   serializedVersion: 4
@@ -155,6 +158,7 @@ MonoBehaviour:
   player: {fileID: 668933761629744693}
   spawnPoint: {fileID: 8498580086664924740}
   sprite: {fileID: 1687487685553306311}
+  iframe: 0
   health: 5
   maxHealth: 5
 --- !u!1 &1478677450368274157
@@ -300,6 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7b0c49f2a52dd249a8555c5a09fef2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMovement: {fileID: 1904802020473513830}
 --- !u!1 &2917731737485607392
 GameObject:
   m_ObjectHideFlags: 0

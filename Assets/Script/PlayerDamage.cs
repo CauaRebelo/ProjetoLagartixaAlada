@@ -9,6 +9,7 @@ public class PlayerDamage : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private SpriteRenderer sprite;
 
+    public bool iframe = false;
     public int health;
     public int maxHealth = 5;
     private Color previousColor;
@@ -21,7 +22,7 @@ public class PlayerDamage : MonoBehaviour
 
     public void Damage()
     {
-        if(!Info_Player.iframe)
+        if(!iframe)
         {
             health--;
             EventSystem.current.PlayerDamage();
@@ -36,11 +37,11 @@ public class PlayerDamage : MonoBehaviour
 
     IEnumerator Immune()
     {
-        Info_Player.iframe = true;
+        iframe = true;
         previousColor = sprite.color;
         sprite.color = Color.red;
         yield return new WaitForSeconds(immuneTime);
-        Info_Player.iframe = false;
+        iframe = false;
         sprite.color = previousColor;
     }
 
