@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-
     [SerializeField] private PlayerMovement playerMovement;
+
+    public float attackDamage;
+    public float toleranceDamage;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +25,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (col.gameObject.tag == "Enemy")
         {
-            col.gameObject.GetComponent<EnemyDamage>().Damage(playerMovement.enchantment, 20f * playerMovement.damage, 15f * playerMovement.damage);
+            col.gameObject.GetComponent<EnemyDamage>().Damage(playerMovement.enchantment, attackDamage * playerMovement.damage, toleranceDamage * playerMovement.damage);
             playerMovement.isAbleToAct = true;
         }
     }

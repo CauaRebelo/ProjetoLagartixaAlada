@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool canAttack = true;
     private float attackCooldown = 0.3f;
+    private float horizontalAttackCooldown = 0.5f;
     private Animator attackAnim;
 
     private bool canDash = true;
@@ -68,6 +69,11 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetButtonDown("Fire2") && canDash)
         {
             StartCoroutine(Dash());
+        }
+
+        if (Input.GetButton("Horizontal") && Input.GetButtonDown("Fire1") && canAttack)
+        {
+            StartCoroutine(HorizontalAttack());
         }
 
         if (Input.GetButtonDown("Fire1") && canAttack)
@@ -157,7 +163,7 @@ public class PlayerMovement : MonoBehaviour
         canDash = true;
     }
 
-    private IEnumerator Attack()
+    private IEnumerator HorizontalAttack()
     {
         canAttack = false;
         isAbleToAct = false;
@@ -168,8 +174,30 @@ public class PlayerMovement : MonoBehaviour
         }
         rb.velocity = Vector2.zero;
         normalAttack.SetActive(true);
+        attackAnim.Play("HorizontalSwing");
+        yield return new WaitForSeconds(horizontalAttackCooldown);
+        rb.drag = 0;
+        normalAttack.SetActive(false);
+        isAbleToAct = true;
+        canMove = true;
+        canAttack = true;
+    }
+
+    private IEnumerator Attack()
+    {
+        canAttack = false;
+        isAbleToAct = false;
+        canMove = false;
+        if (canDash == false)
+        {
+            playerDamage.iframe = false;
+        }
+        rb.drag = 12;
+        rb.velocity = Vector2.zero;
+        normalAttack.SetActive(true);
         attackAnim.Play("NormalSwing");
         yield return new WaitForSeconds(attackCooldown);
+        rb.drag = 0;
         normalAttack.SetActive(false);
         isAbleToAct = true;
         canMove = true;
