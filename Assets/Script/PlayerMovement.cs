@@ -22,9 +22,13 @@ public class PlayerMovement : MonoBehaviour
     private float jumpingPower = 20f;
     private bool isFacingRight = true;
 
+    private Coroutine attackCo;
     private bool canAttack = true;
+    public bool hitEnemy = false;
     private float attackCooldown = 0.3f;
     private float horizontalAttackCooldown = 0.5f;
+    private float verticalAttackAirCooldown = 0.45f;
+    private float verticalAttackCooldown = 0.5f;
     private Animator attackAnim;
 
     private bool canDash = true;
@@ -54,16 +58,16 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetButtonDown("Jump") && isGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-        }
-
-        if(Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
             if (canAttack == false)
             {
                 normalAttack.SetActive(false);
                 canAttack = true;
             }
+        }
+
+        if(Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
 
         if(Input.GetButtonDown("Fire2") && canDash)
@@ -73,12 +77,22 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButton("Horizontal") && Input.GetButtonDown("Fire1") && canAttack)
         {
-            StartCoroutine(HorizontalAttack());
+            attackCo = StartCoroutine(HorizontalAttack());
+        }
+
+        if (Input.GetButton("Vertical") && Input.GetButtonDown("Fire1") && isGrounded() && canAttack)
+        {
+            attackCo = StartCoroutine(VerticalAttack());
+        }
+
+        if (Input.GetButton("Vertical") && Input.GetButtonDown("Fire1") && canAttack)
+        {
+            attackCo = StartCoroutine(VerticalAttackAir());
         }
 
         if (Input.GetButtonDown("Fire1") && canAttack)
         {
-            StartCoroutine(Attack());
+            attackCo = StartCoroutine(Attack());
         }
 
         if (Input.GetButtonDown("Fire3"))
@@ -87,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
             ChangeColor();
         }
 
-        Flip();
+        Flip(false);
     }
 
     private void FixedUpdate()
@@ -108,9 +122,9 @@ public class PlayerMovement : MonoBehaviour
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
-    private void Flip()
+    private void Flip(bool forced)
     {
-        if((isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f) && canMove)
+        if((isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f) && (canMove || forced))
         {
             isFacingRight = !isFacingRight;
             Vector3 localScale = transform.localScale;
@@ -140,6 +154,7 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator Dash()
     {
+        Flip(true);
         canDash = false;
         isAbleToAct = false;
         playerDamage.iframe = true;
@@ -147,6 +162,7 @@ public class PlayerMovement : MonoBehaviour
         {
             normalAttack.SetActive(false);
             canAttack = true;
+            StopCoroutine(attackCo);
         }
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
@@ -158,6 +174,7 @@ public class PlayerMovement : MonoBehaviour
         trail.emitting = false;
         Physics2D.IgnoreLayerCollision(11, 15, false);
         rb.gravityScale = originalGravity;
+        canMove = true;
         isAbleToAct = true;
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
@@ -183,6 +200,55 @@ public class PlayerMovement : MonoBehaviour
         canAttack = true;
     }
 
+    private IEnumerator VerticalAttack()
+    {
+        canAttack = false;
+        isAbleToAct = false;
+        canMove = false;
+        if (canDash == false)
+        {
+            playerDamage.iframe = false;
+        }
+        rb.velocity = Vector2.zero;
+        if (Input.GetAxisRaw("Vertical") > 0f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+        }
+        normalAttack.SetActive(true);
+        attackAnim.Play("VerticalSwing");
+        yield return new WaitForSeconds(verticalAttackCooldown);
+        rb.drag = 0;
+        normalAttack.SetActive(false);
+        isAbleToAct = true;
+        canMove = true;
+        canAttack = true;
+    }
+
+    private IEnumerator VerticalAttackAir()
+    {
+        canAttack = false;
+        isAbleToAct = false;
+        canMove = false;
+        if (canDash == false)
+        {
+            playerDamage.iframe = false;
+        }
+        rb.velocity = Vector2.zero;
+        if(hitEnemy)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpingPower / 2);
+            hitEnemy = false;
+        }
+        normalAttack.SetActive(true);
+        attackAnim.Play("VerticalSwingAir");
+        yield return new WaitForSeconds(verticalAttackAirCooldown);
+        rb.drag = 0;
+        normalAttack.SetActive(false);
+        isAbleToAct = true;
+        canMove = true;
+        canAttack = true;
+    }
+
     private IEnumerator Attack()
     {
         canAttack = false;
@@ -192,7 +258,6 @@ public class PlayerMovement : MonoBehaviour
         {
             playerDamage.iframe = false;
         }
-        rb.drag = 12;
         rb.velocity = Vector2.zero;
         normalAttack.SetActive(true);
         attackAnim.Play("NormalSwing");

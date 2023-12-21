@@ -27,6 +27,7 @@ public class PlayerAttack : MonoBehaviour
         {
             col.gameObject.GetComponent<EnemyDamage>().Damage(playerMovement.enchantment, attackDamage * playerMovement.damage, toleranceDamage * playerMovement.damage);
             playerMovement.isAbleToAct = true;
+            playerMovement.hitEnemy = true;
         }
     }
 
