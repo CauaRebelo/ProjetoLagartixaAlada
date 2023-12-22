@@ -27,7 +27,12 @@ public class PlayerAttack : MonoBehaviour
     {
         if (col.gameObject.tag == "Enemy")
         {
-            col.gameObject.GetComponent<EnemyDamage>().Damage(playerMovement.enchantment, attackDamage * playerMovement.damage, toleranceDamage * playerMovement.damage, knockX, knockY);
+            int knockMultiplier = 1;
+            if(!playerMovement.isFacingRight)
+            {
+                knockMultiplier *= -1;
+            }
+            col.gameObject.GetComponent<EnemyDamage>().Damage(playerMovement.enchantment, attackDamage * playerMovement.damage, toleranceDamage * playerMovement.damage, knockX * knockMultiplier, knockY);
             playerMovement.isAbleToAct = true;
             playerMovement.hitEnemy = true;
         }
