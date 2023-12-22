@@ -34,6 +34,7 @@ public class PlayerAttack : MonoBehaviour
             }
             col.gameObject.GetComponent<EnemyDamage>().Damage(playerMovement.enchantment, attackDamage * playerMovement.damage, toleranceDamage * playerMovement.damage, knockX * knockMultiplier, knockY);
             playerMovement.isAbleToAct = true;
+            playerMovement.canAttack = true;
             playerMovement.hitEnemy = true;
         }
     }

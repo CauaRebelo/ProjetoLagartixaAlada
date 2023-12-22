@@ -24,8 +24,11 @@ public class PlayerMovement : MonoBehaviour
     public bool isFacingRight = true;
 
     private Coroutine attackCo;
-    private bool canAttack = true;
+    public bool canAttack = true;
     public bool hitEnemy = false;
+    private bool spamAttack = false;
+    private bool spamLongAttack = false;
+    private bool spamVerticalAttack = false;
     private float attackCooldown = 0.3f;
     private float horizontalAttackCooldown = 0.5f;
     private float verticalAttackAirCooldown = 0.45f;
@@ -96,22 +99,22 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(Dash());
         }
 
-        if (Input.GetButton("Horizontal") && Input.GetButtonDown("Fire1") && canAttack)
+        if (Input.GetButton("Horizontal") && Input.GetButtonDown("Fire1") && canAttack && !spamLongAttack)
         {
             attackCo = StartCoroutine(HorizontalAttack());
         }
 
-        if (Input.GetButton("Vertical") && Input.GetButtonDown("Fire1") && isGrounded() && canAttack)
+        if (Input.GetButton("Vertical") && Input.GetButtonDown("Fire1") && isGrounded() && canAttack && !spamVerticalAttack)
         {
             attackCo = StartCoroutine(VerticalAttack());
         }
 
-        if (Input.GetButton("Vertical") && Input.GetButtonDown("Fire1") && canAttack)
+        if (Input.GetButton("Vertical") && Input.GetButtonDown("Fire1") && canAttack && !spamVerticalAttack)
         {
             attackCo = StartCoroutine(VerticalAttackAir());
         }
 
-        if (Input.GetButtonDown("Fire1") && canAttack)
+        if (Input.GetButtonDown("Fire1") && canAttack && !spamAttack)
         {
             attackCo = StartCoroutine(Attack());
         }
@@ -209,17 +212,21 @@ public class PlayerMovement : MonoBehaviour
         canAttack = false;
         isAbleToAct = false;
         canMove = false;
+        spamLongAttack = true;
         if (canDash == false)
         {
             playerDamage.iframe = false;
         }
+        OnAttack?.Invoke(false);
+        OnVerticalAttack?.Invoke(false);
         rb.velocity = Vector2.zero;
         normalAttack.SetActive(true);
-        OnLongAttack?.Invoke(!canAttack);
+        OnLongAttack?.Invoke(true);
         attackAnim.Play("HorizontalSwing");
         yield return new WaitForSeconds(horizontalAttackCooldown);
         rb.drag = 0;
-        OnLongAttack?.Invoke(canAttack);
+        OnLongAttack?.Invoke(false);
+        spamLongAttack = false;
         normalAttack.SetActive(false);
         isAbleToAct = true;
         canMove = true;
@@ -231,6 +238,7 @@ public class PlayerMovement : MonoBehaviour
         canAttack = false;
         isAbleToAct = false;
         canMove = false;
+        spamVerticalAttack = true;
         if (canDash == false)
         {
             playerDamage.iframe = false;
@@ -240,13 +248,16 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
         }
+        OnAttack?.Invoke(false);
+        OnLongAttack?.Invoke(false);
         normalAttack.SetActive(true);
-        OnVerticalAttack?.Invoke(!canAttack);
+        OnVerticalAttack?.Invoke(true);
         attackAnim.Play("VerticalSwing");
         yield return new WaitForSeconds(verticalAttackCooldown);
         rb.drag = 0;
-        OnVerticalAttack?.Invoke(canAttack);
+        OnVerticalAttack?.Invoke(false);
         normalAttack.SetActive(false);
+        spamVerticalAttack = false;
         isAbleToAct = true;
         canMove = true;
         canAttack = true;
@@ -257,6 +268,7 @@ public class PlayerMovement : MonoBehaviour
         canAttack = false;
         isAbleToAct = false;
         canMove = false;
+        spamVerticalAttack = true;
         if (canDash == false)
         {
             playerDamage.iframe = false;
@@ -267,13 +279,16 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower / 2);
             hitEnemy = false;
         }
+        OnAttack?.Invoke(false);
+        OnLongAttack?.Invoke(false);
         normalAttack.SetActive(true);
-        OnVerticalAttack?.Invoke(!canAttack);
+        OnVerticalAttack?.Invoke(true);
         attackAnim.Play("VerticalSwingAir");
         yield return new WaitForSeconds(verticalAttackAirCooldown);
         rb.drag = 0;
         normalAttack.SetActive(false);
-        OnVerticalAttack?.Invoke(canAttack);
+        OnVerticalAttack?.Invoke(false);
+        spamVerticalAttack = false;
         isAbleToAct = true;
         canMove = true;
         canAttack = true;
@@ -284,17 +299,21 @@ public class PlayerMovement : MonoBehaviour
         canAttack = false;
         isAbleToAct = false;
         canMove = false;
+        spamAttack = true;
         if (canDash == false)
         {
             playerDamage.iframe = false;
         }
         rb.velocity = Vector2.zero;
+        OnLongAttack?.Invoke(false);
+        OnVerticalAttack?.Invoke(false);
         normalAttack.SetActive(true);
-        OnAttack?.Invoke(!canAttack);
+        OnAttack?.Invoke(true);
         attackAnim.Play("NormalSwing");
         yield return new WaitForSeconds(attackCooldown);
         rb.drag = 0;
-        OnAttack?.Invoke(canAttack);
+        OnAttack?.Invoke(false);
+        spamAttack = false;
         normalAttack.SetActive(false);
         isAbleToAct = true;
         canMove = true;

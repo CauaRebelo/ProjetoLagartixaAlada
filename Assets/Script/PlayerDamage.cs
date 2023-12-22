@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class PlayerDamage : MonoBehaviour
 {
     [SerializeField] private GameObject player;
-    [SerializeField] private Transform spawnPoint;
+    public Transform spawnPoint;
     [SerializeField] private SpriteRenderer sprite;
 
     public bool iframe = false;
