@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -37,6 +38,24 @@ public class PlayerMovement : MonoBehaviour
     private float dashingTime = 0.2f;
     private float dashingCooldown = 0.7f;
 
+    [field: SerializeField]
+    public UnityEvent<float> OnVelocityChange { get; set; }
+
+    [field: SerializeField]
+    public UnityEvent<bool> OnGroundedChange { get; set; }
+
+    [field: SerializeField]
+    public UnityEvent<bool> OnDash { get; set; }
+
+    [field: SerializeField]
+    public UnityEvent<bool> OnAttack { get; set; }
+
+    [field: SerializeField]
+    public UnityEvent<bool> OnLongAttack { get; set; }
+
+    [field: SerializeField]
+    public UnityEvent<bool> OnVerticalAttack { get; set; }
+
     public void Start()
     {
         //EventSystem.current.onPlayerDamage += OnPlayerDamage;
@@ -52,6 +71,8 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
+
+        OnGroundedChange?.Invoke(isGrounded());
 
         horizontal = Input.GetAxisRaw("Horizontal");
 
@@ -114,6 +135,7 @@ public class PlayerMovement : MonoBehaviour
         if (canMove)
         {
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+            OnVelocityChange?.Invoke(rb.velocity.x);
         }
     }
 
@@ -167,9 +189,11 @@ public class PlayerMovement : MonoBehaviour
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         Physics2D.IgnoreLayerCollision(11, 15, true);
+        OnDash?.Invoke(!canDash);
         rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
         trail.emitting = true;
         yield return new WaitForSeconds(dashingTime);
+        OnDash?.Invoke(canDash);
         playerDamage.iframe = false;
         trail.emitting = false;
         Physics2D.IgnoreLayerCollision(11, 15, false);
@@ -191,9 +215,11 @@ public class PlayerMovement : MonoBehaviour
         }
         rb.velocity = Vector2.zero;
         normalAttack.SetActive(true);
+        OnLongAttack?.Invoke(!canAttack);
         attackAnim.Play("HorizontalSwing");
         yield return new WaitForSeconds(horizontalAttackCooldown);
         rb.drag = 0;
+        OnLongAttack?.Invoke(canAttack);
         normalAttack.SetActive(false);
         isAbleToAct = true;
         canMove = true;
@@ -215,9 +241,11 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
         }
         normalAttack.SetActive(true);
+        OnVerticalAttack?.Invoke(!canAttack);
         attackAnim.Play("VerticalSwing");
         yield return new WaitForSeconds(verticalAttackCooldown);
         rb.drag = 0;
+        OnVerticalAttack?.Invoke(canAttack);
         normalAttack.SetActive(false);
         isAbleToAct = true;
         canMove = true;
@@ -240,10 +268,12 @@ public class PlayerMovement : MonoBehaviour
             hitEnemy = false;
         }
         normalAttack.SetActive(true);
+        OnVerticalAttack?.Invoke(!canAttack);
         attackAnim.Play("VerticalSwingAir");
         yield return new WaitForSeconds(verticalAttackAirCooldown);
         rb.drag = 0;
         normalAttack.SetActive(false);
+        OnVerticalAttack?.Invoke(canAttack);
         isAbleToAct = true;
         canMove = true;
         canAttack = true;
@@ -260,9 +290,11 @@ public class PlayerMovement : MonoBehaviour
         }
         rb.velocity = Vector2.zero;
         normalAttack.SetActive(true);
+        OnAttack?.Invoke(!canAttack);
         attackAnim.Play("NormalSwing");
         yield return new WaitForSeconds(attackCooldown);
         rb.drag = 0;
+        OnAttack?.Invoke(canAttack);
         normalAttack.SetActive(false);
         isAbleToAct = true;
         canMove = true;

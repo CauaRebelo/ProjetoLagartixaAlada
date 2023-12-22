@@ -8,6 +8,8 @@ public class PlayerAttack : MonoBehaviour
 
     public float attackDamage;
     public float toleranceDamage;
+    public float knockX;
+    public float knockY;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +27,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (col.gameObject.tag == "Enemy")
         {
-            col.gameObject.GetComponent<EnemyDamage>().Damage(playerMovement.enchantment, attackDamage * playerMovement.damage, toleranceDamage * playerMovement.damage);
+            col.gameObject.GetComponent<EnemyDamage>().Damage(playerMovement.enchantment, attackDamage * playerMovement.damage, toleranceDamage * playerMovement.damage, knockX, knockY);
             playerMovement.isAbleToAct = true;
             playerMovement.hitEnemy = true;
         }

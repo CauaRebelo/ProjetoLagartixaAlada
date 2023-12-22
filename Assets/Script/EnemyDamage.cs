@@ -8,6 +8,7 @@ public class EnemyDamage : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private ResourceBar healthBar;
     [SerializeField] private ResourceBar toleranceBar;
+    [SerializeField] private Rigidbody2D rb;
 
     public float health;
     public float maxHealth = 60f;
@@ -27,7 +28,7 @@ public class EnemyDamage : MonoBehaviour
         toleranceBar.UpdateResourceBar(tolerance, maxTolerance);
     }
 
-    public void Damage(int enchatment, float damage, float tolerancedamage)
+    public void Damage(int enchatment, float damage, float tolerancedamage, float knockX, float knockY)
     {
         health -= resistences[enchatment] * damage;
         healthBar.UpdateResourceBar(health, maxHealth);
@@ -42,6 +43,7 @@ public class EnemyDamage : MonoBehaviour
         {
             enemy.SetActive(false);
         }
+        rb.velocity = new Vector2(resistences[0] * knockX, resistences[0] * knockY);
     }
 
     public void OnDeath()
