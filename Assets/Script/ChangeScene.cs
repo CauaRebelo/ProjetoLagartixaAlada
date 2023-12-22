@@ -17,4 +17,9 @@ public class ChangeScene : MonoBehaviour
     {
         SceneManager.LoadScene("TesteInimigoSemAI");
     }
+
+    public void loadSceneFase4()
+    {
+        SceneManager.LoadScene("TesteInimigosRawr");
+    }
 }

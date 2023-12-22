@@ -1680,7 +1680,7 @@ MonoBehaviour:
   bulletLife: 2
   speed: 10
   spawnerType: 0
-  firingRate: 1
+  firingRate: 1.7
 --- !u!1 &7990570944236858016
 GameObject:
   m_ObjectHideFlags: 0
