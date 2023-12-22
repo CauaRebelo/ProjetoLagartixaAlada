@@ -14,6 +14,8 @@ public class EnemyDamage : MonoBehaviour
     public float maxHealth = 60f;
     public float tolerance;
     public float maxTolerance = 20f;
+    private float gravity;
+    public bool broken;
     public float[] resistences = new float[4] { 0.1f, 0.2f, 0.2f, 1.5f };
     public float[] originalresistences;
     public float[] brokenresistenes = new float[4] { 1f, 1f, 1f, 2f };
@@ -22,6 +24,8 @@ public class EnemyDamage : MonoBehaviour
     {
         EventSystem.current.onDeath += OnDeath;
         originalresistences = resistences;
+        gravity = rb.gravityScale;
+        broken = false;
         health = maxHealth;
         healthBar.UpdateResourceBar(health, maxHealth);
         tolerance = maxTolerance;
@@ -37,6 +41,7 @@ public class EnemyDamage : MonoBehaviour
 
         if (tolerance <= 0)
         {
+            broken = true;
             resistences = brokenresistenes;
         }
         if (health <= 0)
@@ -50,7 +55,9 @@ public class EnemyDamage : MonoBehaviour
     {
         enemy.transform.position = spawnPoint.position ;
         health = maxHealth;
+        rb.gravityScale = gravity;
         healthBar.UpdateResourceBar(health, maxHealth);
+        broken = false;
         tolerance = maxTolerance;
         resistences = originalresistences;
         toleranceBar.UpdateResourceBar(tolerance, maxTolerance);
