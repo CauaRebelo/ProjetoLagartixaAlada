@@ -10,7 +10,7 @@ public class BulletSpawner : MonoBehaviour
 {
     enum SpawnerType { Straight, Spin }
 
-    [SerializeField] private Transform playerTransform;
+    //[SerializeField] private Transform playerTransform;
 
     [Header("Bullet Attributes")]
     public GameObject bullet;
@@ -35,9 +35,9 @@ public class BulletSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float angle = Mathf.Atan2(playerTransform.position.y - transform.position.y, playerTransform.position.x - transform.position.x) * Mathf.Rad2Deg;
-        Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 100000f * Time.deltaTime);
+        //float angle = Mathf.Atan2(playerTransform.position.y - transform.position.y, playerTransform.position.x - transform.position.x) * Mathf.Rad2Deg;
+        //Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        //transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 100000f * Time.deltaTime);
         timer += Time.deltaTime;
         if (spawnerType == SpawnerType.Spin) transform.eulerAngles = new Vector3(0f, 0f, transform.eulerAngles.z + 1f);
         if (timer >= firingRate)
@@ -53,7 +53,7 @@ public class BulletSpawner : MonoBehaviour
             spawnedBullet = Instantiate(bullet, transform.position, Quaternion.identity);
             spawnedBullet.GetComponent<Bullet>().speed = speed;
             spawnedBullet.GetComponent<Bullet>().bulletLife = bulletLife;
-            spawnedBullet.GetComponent<Bullet>().playerTransform = playerTransform;
+            //spawnedBullet.GetComponent<Bullet>().playerTransform = playerTransform;
             spawnedBullet.transform.rotation = transform.rotation;
         }
     }

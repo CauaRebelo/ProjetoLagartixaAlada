@@ -675,7 +675,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
-  bullet: {fileID: 2945061777581591167, guid: 3900e422f55ffb44cb6b6083ca2fdfe8, type: 3}
+  bullet: {fileID: 4328358667394864229, guid: 04187926cffd7124192befd9bc8f85e1, type: 3}
   bulletLife: 2
   speed: 10
   spawnerType: 0

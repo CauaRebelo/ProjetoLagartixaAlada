@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/TesteCamera.unity
+    guid: 55dc4f94c41d99f4da0859b4561bfb58
+  - enabled: 1
+    path: Assets/Scenes/TesteInimigosRawr.unity
+    guid: d9c62c18824d16947bf4454a76d19278
+  - enabled: 1
     path: Assets/Scenes/TesteInimigo.unity
     guid: 7aa9c8f0660459e47ae3dd242e5de38a
   - enabled: 1
