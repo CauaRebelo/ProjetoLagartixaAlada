@@ -9,9 +9,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private GameObject normalAttack;
+    [SerializeField] private GameObject playerHitbox;
+    [SerializeField] private GameObject ripositeHitbox;
     [SerializeField] private TrailRenderer trail;
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private PlayerDamage playerDamage;
+
+    public GameObject dashaoe_prefab_fire;
+    public GameObject dashaoe_prefab_ice;
+    public GameObject dashaoe_prefab_light;
 
     public int enchantment;
     private int maxEnchantment;
@@ -214,7 +220,9 @@ public class PlayerMovement : MonoBehaviour
                 if (abilityTree[0,4])
                 {
                     //Dash de Gelo 1
-                    if(abilityTree[0, 6])
+                    playerHitbox.AddComponent<StatusAttack>();
+                    playerHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Slow;
+                    if (abilityTree[0, 6])
                     {
                         //Dash de Gelo 3
                     }
@@ -225,7 +233,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 else if(abilityTree[0, 5])
                 {
-                    //Dash de Gelo 2
+                    Instantiate(dashaoe_prefab_ice, transform.position + new Vector3(0 + 1 * transform.localScale.x, 0 , 0), Quaternion.identity);
                     if (abilityTree[0, 6])
                     {
                         //Dash de Gelo 3
@@ -240,6 +248,8 @@ public class PlayerMovement : MonoBehaviour
                 if (abilityTree[1, 4])
                 {
                     //Dash de Fogo 1
+                    playerHitbox.AddComponent<StatusAttack>();
+                    playerHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Burning;
                     Debug.Log("Funcionou!");
                     if (abilityTree[1, 6])
                     {
@@ -252,7 +262,8 @@ public class PlayerMovement : MonoBehaviour
                 }
                 else if (abilityTree[1, 5])
                 {
-                    //Dash de Fogo 2
+                    Instantiate(dashaoe_prefab_fire, transform.position + new Vector3(0 + 1 * transform.localScale.x, 0, 0), Quaternion.identity);
+                    Debug.Log("Funcionou!");
                     if (abilityTree[1, 6])
                     {
                         //Dash de Fogo 3
@@ -278,7 +289,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 else if (abilityTree[2, 5])
                 {
-                    //Dash de Raio 2
+                    Instantiate(dashaoe_prefab_light, transform.position + new Vector3(0 + 1 * transform.localScale.x, 0, 0), Quaternion.identity);
                     if (abilityTree[2, 6])
                     {
                         //Dash de Raio 3
@@ -299,6 +310,7 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(dashingTime);
         OnDash?.Invoke(canDash);
         playerDamage.iframe = false;
+        Destroy(playerHitbox.GetComponent<StatusAttack>());
         trail.emitting = false;
         Physics2D.IgnoreLayerCollision(11, 15, false);
         rb.gravityScale = originalGravity;
@@ -442,6 +454,8 @@ public class PlayerMovement : MonoBehaviour
                 if (abilityTree[0, 0])
                 {
                     //Reflect de Gelo 1
+                    ripositeHitbox.AddComponent<StatusAttack>();
+                    ripositeHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Slow;
                     if (abilityTree[0, 2])
                     {
                         //Reflect de Gelo 3
@@ -468,6 +482,8 @@ public class PlayerMovement : MonoBehaviour
                 if (abilityTree[1, 0])
                 {
                     //Reflect de Fogo 1
+                    ripositeHitbox.AddComponent<StatusAttack>();
+                    ripositeHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Burning;
                     if (abilityTree[1, 2])
                     {
                         //Reflect de Fogo 3
@@ -522,6 +538,7 @@ public class PlayerMovement : MonoBehaviour
         playerDamage.parrying = false;
         yield return new WaitForSeconds(parryCooldown);
         rb.drag = 0;
+        Destroy(ripositeHitbox.GetComponent<StatusAttack>());
         OnParry?.Invoke(false);
         canDash = true;
         canAttack = true;
@@ -532,5 +549,6 @@ public class PlayerMovement : MonoBehaviour
     public void unlockSkill(int enchant)
     {
         abilityTree[enchant/10, enchant%10] = true;
+        Debug.Log(enchant%10);
     }
 }
