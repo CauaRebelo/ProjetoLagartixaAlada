@@ -26,6 +26,7 @@ public class BasicEnemyBehaviour : MonoBehaviour
     public void Start()
     {
         EventSystem.current.onDeath += OnDeath;
+        playerTransform = GameObject.Find("/MainPlayer/Player").transform;
     }
 
     // Update is called once per frame
@@ -83,12 +84,12 @@ public class BasicEnemyBehaviour : MonoBehaviour
         if (rb.transform.position.x > playerTransform.position.x)
         {
             rb.transform.localScale = new Vector3(1, 1, 1);
-            rb.transform.position += Vector3.left * movementSpeed * Time.deltaTime;
+            rb.transform.position += Vector3.left * movementSpeed * enemyDamage.speedMultiplier * Time.deltaTime;
         }
         if (rb.transform.position.x < playerTransform.position.x)
         {
             rb.transform.localScale = new Vector3(-1, 1, 1);
-            rb.transform.position += Vector3.right * movementSpeed * Time.deltaTime;
+            rb.transform.position += Vector3.right * movementSpeed * enemyDamage.speedMultiplier * Time.deltaTime;
         }
     }
 

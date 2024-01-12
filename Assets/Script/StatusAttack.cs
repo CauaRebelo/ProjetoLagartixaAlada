@@ -5,7 +5,7 @@ using UnityEngine;
 public class StatusAttack : MonoBehaviour
 {
     
-    [SerializeField] private StatusEffects.DebuffsType debuff;
+    public StatusEffects.DebuffsType debuff;
 
     void Start()
     {
