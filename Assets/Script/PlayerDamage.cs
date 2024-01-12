@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class PlayerDamage : MonoBehaviour
 {
     [SerializeField] private GameObject player;
+    [SerializeField] private HealthBar healthBar;
     public Transform spawnPoint;
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private PlayerReflect playerReflect;
@@ -20,6 +21,7 @@ public class PlayerDamage : MonoBehaviour
     void Start()
     {
         health = maxHealth;
+        healthBar.UpdateResourceBar(health, maxHealth);
     }
 
     public void Damage()
@@ -35,12 +37,20 @@ public class PlayerDamage : MonoBehaviour
             health--;
             EventSystem.current.PlayerDamage();
             StartCoroutine(Immune());
+            healthBar.UpdateResourceBar(health, maxHealth);
         }
 
         if(health <= 0)
         {
             StartCoroutine(GameOver());
         }
+    }
+
+    public void FallDamage()
+    {
+        health = 0;
+        healthBar.UpdateResourceBar(health, maxHealth);
+        StartCoroutine(GameOver());
     }
 
     IEnumerator Immune()
@@ -56,6 +66,7 @@ public class PlayerDamage : MonoBehaviour
     IEnumerator GameOver()
     {
         health = maxHealth;
+        healthBar.UpdateResourceBar(health, maxHealth);
         player.transform.position = spawnPoint.position;
         //Time.timeScale = 0.1f;
         EventSystem.current.Death();

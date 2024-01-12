@@ -26,7 +26,7 @@ public class BasicEnemyBehaviour : MonoBehaviour
     public void Start()
     {
         EventSystem.current.onDeath += OnDeath;
-        playerTransform = GameObject.Find("/MainPlayer/Player").transform;
+        playerTransform = GameObject.FindWithTag("Player").transform;
     }
 
     // Update is called once per frame
