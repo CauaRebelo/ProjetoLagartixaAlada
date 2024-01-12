@@ -8,6 +8,7 @@ public class BasicEnemyBehaviour : MonoBehaviour
     [SerializeField] private Transform playerTransform;
     [SerializeField] private GameObject enemy;
     [SerializeField] private GameObject attack;
+    [SerializeField] private EnemyDamage enemyDamage;
 
     public List<Transform> waypoints;
 
@@ -60,7 +61,7 @@ public class BasicEnemyBehaviour : MonoBehaviour
                 rb.transform.localScale = new Vector3(-1, 1, 1);
             else
                 rb.transform.localScale = new Vector3(1, 1, 1);
-            rb.transform.position = Vector2.MoveTowards(rb.transform.position, goalPoint.position, movementSpeed * Time.deltaTime);
+            rb.transform.position = Vector2.MoveTowards(rb.transform.position, goalPoint.position, movementSpeed * enemyDamage.speedMultiplier * Time.deltaTime);
             if (Vector2.Distance(rb.transform.position, goalPoint.position) < 1f)
             {
                 if (nextPoints == waypoints.Count - 1)

@@ -17,7 +17,9 @@ public class PlayerMovement : MonoBehaviour
     private int maxEnchantment;
     public float damage= 1f;
 
-    private bool canMove = true;
+    public bool[,] abilityTree = {{ false, false, false, false, false, false, false, false, false, false, false, false }, { false, false, false, false, false, false, false, false, false, false, false, false }, { false, false, false, false, false, false, false, false, false, false, false, false }, };
+
+    public bool canMove = true;
     private float horizontal;
     private float speed = 8f;
     private float jumpingPower = 20f;
@@ -41,6 +43,10 @@ public class PlayerMovement : MonoBehaviour
     private float dashingTime = 0.2f;
     private float dashingCooldown = 0.7f;
 
+    private float parryStart = 0.3f;
+    private float parryDuration = 0.2f;
+    private float parryCooldown = 0.4f;
+
     [field: SerializeField]
     public UnityEvent<float> OnVelocityChange { get; set; }
 
@@ -49,6 +55,12 @@ public class PlayerMovement : MonoBehaviour
 
     [field: SerializeField]
     public UnityEvent<bool> OnDash { get; set; }
+
+    [field: SerializeField]
+    public UnityEvent<bool> OnParry { get; set; }
+
+    [field: SerializeField]
+    public UnityEvent<bool> OnRiposite { get; set; }
 
     [field: SerializeField]
     public UnityEvent<bool> OnAttack { get; set; }
@@ -94,7 +106,12 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
 
-        if(Input.GetButtonDown("Fire2") && canDash)
+        if (Input.GetButton("Vertical") && Input.GetButtonDown("Fire2") && canAttack)
+        {
+            StartCoroutine(Reflect());
+        }
+
+        if (Input.GetButtonDown("Fire2") && canDash)
         {
             StartCoroutine(Dash());
         }
@@ -189,6 +206,90 @@ public class PlayerMovement : MonoBehaviour
             canAttack = true;
             StopCoroutine(attackCo);
         }
+        switch (enchantment)
+        {
+            case 0:
+                break;
+            case 1:
+                if (abilityTree[0,4])
+                {
+                    //Dash de Gelo 1
+                    if(abilityTree[0, 6])
+                    {
+                        //Dash de Gelo 3
+                    }
+                    else if(abilityTree[0, 7])
+                    {
+                        //Dash de Gelo 4;
+                    }
+                }
+                else if(abilityTree[0, 5])
+                {
+                    //Dash de Gelo 2
+                    if (abilityTree[0, 6])
+                    {
+                        //Dash de Gelo 3
+                    }
+                    else if (abilityTree[0, 7])
+                    {
+                        //Dash de Gelo 4;
+                    }
+                }
+                break;
+            case 2:
+                if (abilityTree[1, 4])
+                {
+                    //Dash de Fogo 1
+                    Debug.Log("Funcionou!");
+                    if (abilityTree[1, 6])
+                    {
+                        //Dash de Fogo 3
+                    }
+                    else if (abilityTree[1, 7])
+                    {
+                        //Dash de Fogo 4;
+                    }
+                }
+                else if (abilityTree[1, 5])
+                {
+                    //Dash de Fogo 2
+                    if (abilityTree[1, 6])
+                    {
+                        //Dash de Fogo 3
+                    }
+                    else if (abilityTree[1, 7])
+                    {
+                        //Dash de Fogo 4;
+                    }
+                }
+                break;
+            case 3:
+                if (abilityTree[2, 4])
+                {
+                    //Dash de Raio 1
+                    if (abilityTree[2, 6])
+                    {
+                        //Dash de Raio 3
+                    }
+                    else if (abilityTree[2, 7])
+                    {
+                        //Dash de Raio 4;
+                    }
+                }
+                else if (abilityTree[2, 5])
+                {
+                    //Dash de Raio 2
+                    if (abilityTree[2, 6])
+                    {
+                        //Dash de Raio 3
+                    }
+                    else if (abilityTree[2, 7])
+                    {
+                        //Dash de Raio 3
+                    }
+                }
+                break;
+        }
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         Physics2D.IgnoreLayerCollision(11, 15, true);
@@ -269,6 +370,7 @@ public class PlayerMovement : MonoBehaviour
         isAbleToAct = false;
         canMove = false;
         spamVerticalAttack = true;
+        hitEnemy = false;
         if (canDash == false)
         {
             playerDamage.iframe = false;
@@ -318,5 +420,117 @@ public class PlayerMovement : MonoBehaviour
         isAbleToAct = true;
         canMove = true;
         canAttack = true;
+    }
+
+    private IEnumerator Reflect()
+    {
+        canAttack = false;
+        canDash = false;
+        isAbleToAct = false;
+        canMove = false;
+        if (canDash == false)
+        {
+            playerDamage.iframe = false;
+        }
+        OnParry?.Invoke(true);
+        yield return new WaitForSeconds(parryStart);
+        switch (enchantment)
+        {
+            case 0:
+                break;
+            case 1:
+                if (abilityTree[0, 0])
+                {
+                    //Reflect de Gelo 1
+                    if (abilityTree[0, 2])
+                    {
+                        //Reflect de Gelo 3
+                    }
+                    else if (abilityTree[0, 3])
+                    {
+                        //Reflect de Gelo 4;
+                    }
+                }
+                else if (abilityTree[0, 1])
+                {
+                    //Reflect de Gelo 2
+                    if (abilityTree[0, 2])
+                    {
+                        //Reflect de Gelo 3
+                    }
+                    else if (abilityTree[0, 3])
+                    {
+                        //Reflect de Gelo 4
+                    }
+                }
+                break;
+            case 2:
+                if (abilityTree[1, 0])
+                {
+                    //Reflect de Fogo 1
+                    if (abilityTree[1, 2])
+                    {
+                        //Reflect de Fogo 3
+                    }
+                    else if (abilityTree[1, 3])
+                    {
+                        //Reflect de Fogo 4;
+                    }
+                }
+                else if (abilityTree[1, 1])
+                {
+                    //Reflect de Fogo 2
+                    if (abilityTree[1, 2])
+                    {
+                        //Reflect de Fogo 3
+                    }
+                    else if (abilityTree[1, 3])
+                    {
+                        //Reflect de Fogo 4;
+                    }
+                }
+                break;
+            case 3:
+                if (abilityTree[2, 0])
+                {
+                    //Reflect de Raio 1
+                    if (abilityTree[2, 2])
+                    {
+                        //Reflect de Raio 3
+                    }
+                    else if (abilityTree[2, 3])
+                    {
+                        //Reflect de Raio 4;
+                    }
+                }
+                else if (abilityTree[2, 1])
+                {
+                    //Reflect de Raio 2
+                    if (abilityTree[2, 2])
+                    {
+                        //Reflect de Raio 3
+                    }
+                    else if (abilityTree[2, 3])
+                    {
+                        //Reflect de Raio 4;
+                    }
+                }
+                break;
+        }
+        playerDamage.parrying = true;
+        yield return new WaitForSeconds(parryDuration);
+        playerDamage.parrying = false;
+        yield return new WaitForSeconds(parryCooldown);
+        rb.drag = 0;
+        OnParry?.Invoke(false);
+        canDash = true;
+        canAttack = true;
+        isAbleToAct = true;
+        canMove = true;
+    }
+
+    public void unlockSkill(int enchant)
+    {
+        abilityTree[enchant/10, enchant%10] = true;
     }
 }

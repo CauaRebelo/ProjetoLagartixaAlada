@@ -10,6 +10,7 @@ public class EnemyDamage : MonoBehaviour
     [SerializeField] private ResourceBar toleranceBar;
     [SerializeField] private Rigidbody2D rb;
 
+    public float speedMultiplier = 1f;
     public float health;
     public float maxHealth = 60f;
     public float tolerance;

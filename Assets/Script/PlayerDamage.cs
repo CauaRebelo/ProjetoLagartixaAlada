@@ -8,7 +8,9 @@ public class PlayerDamage : MonoBehaviour
     [SerializeField] private GameObject player;
     public Transform spawnPoint;
     [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private PlayerReflect playerReflect;
 
+    public bool parrying = false;
     public bool iframe = false;
     public int health;
     public int maxHealth = 5;
@@ -22,6 +24,12 @@ public class PlayerDamage : MonoBehaviour
 
     public void Damage()
     {
+        if (parrying)
+        {
+            playerReflect.Riposite();
+            return;
+        }
+
         if(!iframe)
         {
             health--;
