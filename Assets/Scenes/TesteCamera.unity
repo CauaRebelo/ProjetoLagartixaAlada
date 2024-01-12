@@ -1906,6 +1906,38 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4775979764383040564, guid: 8997efbee67474e4cb1055f16f886fcc, type: 3}
+      propertyPath: broken
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4775979764383040564, guid: 8997efbee67474e4cb1055f16f886fcc, type: 3}
+      propertyPath: health
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 4775979764383040564, guid: 8997efbee67474e4cb1055f16f886fcc, type: 3}
+      propertyPath: maxHealth
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 4775979764383040564, guid: 8997efbee67474e4cb1055f16f886fcc, type: 3}
+      propertyPath: tolerance
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 4775979764383040564, guid: 8997efbee67474e4cb1055f16f886fcc, type: 3}
+      propertyPath: maxTolerance
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 4775979764383040564, guid: 8997efbee67474e4cb1055f16f886fcc, type: 3}
+      propertyPath: resistences.Array.data[0]
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4775979764383040564, guid: 8997efbee67474e4cb1055f16f886fcc, type: 3}
+      propertyPath: resistences.Array.data[1]
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4775979764383040564, guid: 8997efbee67474e4cb1055f16f886fcc, type: 3}
+      propertyPath: resistences.Array.data[2]
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5339380317527785525, guid: 8997efbee67474e4cb1055f16f886fcc, type: 3}
       propertyPath: m_Name
       value: SampleEnemy

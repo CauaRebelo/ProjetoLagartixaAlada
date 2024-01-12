@@ -674,7 +674,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43478637eb40476489f26b01e1e08989, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
   bullet: {fileID: 4328358667394864229, guid: 04187926cffd7124192befd9bc8f85e1, type: 3}
   bulletLife: 2
   speed: 10
@@ -860,15 +859,15 @@ MonoBehaviour:
   healthBar: {fileID: 3945234243017941298}
   toleranceBar: {fileID: 2126093173945000128}
   rb: {fileID: 6400512464069978928}
-  health: 150
-  maxHealth: 150
+  health: 70
+  maxHealth: 70
   tolerance: 30
   maxTolerance: 30
   broken: 0
   resistences:
-  - 0
-  - 0.4
-  - 0.4
+  - 0.01
+  - 0.01
+  - 0.01
   - 2
   originalresistences: []
   brokenresistenes:
@@ -901,7 +900,7 @@ MonoBehaviour:
   chaseDistance: 7
   attackDistance: 4
   attackSpeed: 2
-  attackDowntime: 2.5
+  attackDowntime: 4
   isChasing: 0
   isAttacking: 0
 --- !u!1 &2114401673650103318

@@ -78,7 +78,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7189154064158123691, guid: 3a53312150cf2654397ae91e85d35b24, type: 3}
       propertyPath: resistences.Array.data[3]
-      value: 0.4
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 7189154064158123691, guid: 3a53312150cf2654397ae91e85d35b24, type: 3}
       propertyPath: brokenresistenes.Array.data[2]

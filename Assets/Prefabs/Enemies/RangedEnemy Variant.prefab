@@ -70,11 +70,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7366913561842954305, guid: 0f72d12f073c03d4e8b664a7af33a5d2, type: 3}
       propertyPath: resistences.Array.data[2]
-      value: 2
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 7366913561842954305, guid: 0f72d12f073c03d4e8b664a7af33a5d2, type: 3}
       propertyPath: resistences.Array.data[3]
-      value: 0.4
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7366913561842954305, guid: 0f72d12f073c03d4e8b664a7af33a5d2, type: 3}
       propertyPath: brokenresistenes.Array.data[2]

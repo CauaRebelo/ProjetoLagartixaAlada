@@ -66,19 +66,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4775979764383040564, guid: 8997efbee67474e4cb1055f16f886fcc, type: 3}
       propertyPath: resistences.Array.data[1]
-      value: 0.2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4775979764383040564, guid: 8997efbee67474e4cb1055f16f886fcc, type: 3}
       propertyPath: resistences.Array.data[2]
-      value: 1.5
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 4775979764383040564, guid: 8997efbee67474e4cb1055f16f886fcc, type: 3}
       propertyPath: resistences.Array.data[3]
-      value: 0.2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4775979764383040564, guid: 8997efbee67474e4cb1055f16f886fcc, type: 3}
       propertyPath: brokenresistenes.Array.data[2]
-      value: 2
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 4775979764383040564, guid: 8997efbee67474e4cb1055f16f886fcc, type: 3}
       propertyPath: brokenresistenes.Array.data[3]
@@ -90,6 +90,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8017612040842468435, guid: 8997efbee67474e4cb1055f16f886fcc, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9152648286196927735, guid: 8997efbee67474e4cb1055f16f886fcc, type: 3}
+      propertyPath: attackSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9152648286196927735, guid: 8997efbee67474e4cb1055f16f886fcc, type: 3}
+      propertyPath: isAttacking
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

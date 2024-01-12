@@ -20,17 +20,37 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.54509807
       objectReference: {fileID: 0}
+    - target: {fileID: 1175960275628763317, guid: 9332875a3989eb94984ca0684207bdd6, type: 3}
+      propertyPath: isChasing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1175960275628763317, guid: 9332875a3989eb94984ca0684207bdd6, type: 3}
+      propertyPath: attackSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1175960275628763317, guid: 9332875a3989eb94984ca0684207bdd6, type: 3}
+      propertyPath: attackDowntime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2067169991643872372, guid: 9332875a3989eb94984ca0684207bdd6, type: 3}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2067169991643872372, guid: 9332875a3989eb94984ca0684207bdd6, type: 3}
       propertyPath: bullet
       value: 
       objectReference: {fileID: 3974713337251232654, guid: 12face00d48ba5340962e2a4662c10e6, type: 3}
+    - target: {fileID: 2067169991643872372, guid: 9332875a3989eb94984ca0684207bdd6, type: 3}
+      propertyPath: firingRate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3926275142664092705, guid: 9332875a3989eb94984ca0684207bdd6, type: 3}
       propertyPath: resistences.Array.data[1]
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3926275142664092705, guid: 9332875a3989eb94984ca0684207bdd6, type: 3}
       propertyPath: resistences.Array.data[2]
-      value: 0.4
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 3926275142664092705, guid: 9332875a3989eb94984ca0684207bdd6, type: 3}
       propertyPath: brokenresistenes.Array.data[1]

@@ -1473,8 +1473,8 @@ MonoBehaviour:
   nextPoints: 0
   chaseDistance: 5
   attackDistance: 2
-  attackSpeed: 1
-  attackDowntime: 2
+  attackSpeed: 1.5
+  attackDowntime: 3
   isChasing: 0
   isAttacking: 0
 --- !u!114 &4775979764383040564
@@ -1494,22 +1494,22 @@ MonoBehaviour:
   healthBar: {fileID: 7938010007466118958}
   toleranceBar: {fileID: 9061982250047996188}
   rb: {fileID: 2795843175135887898}
-  health: 200
-  maxHealth: 200
-  tolerance: 100
-  maxTolerance: 100
+  health: 160
+  maxHealth: 160
+  tolerance: 60
+  maxTolerance: 60
   broken: 0
   resistences:
-  - 0.1
-  - 0.2
-  - 0.2
-  - 1.5
+  - 0.5
+  - 0.5
+  - 0.5
+  - 1.25
   originalresistences: []
   brokenresistenes:
   - 1
   - 1
   - 1
-  - 2
+  - 1.25
 --- !u!1 &7801798793507905151
 GameObject:
   m_ObjectHideFlags: 0

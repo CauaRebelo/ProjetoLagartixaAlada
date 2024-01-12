@@ -70,15 +70,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7126289095999571629, guid: ae36ba9988567b44a9b3dc7d3835466a, type: 3}
       propertyPath: resistences.Array.data[1]
-      value: 1.5
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 7126289095999571629, guid: ae36ba9988567b44a9b3dc7d3835466a, type: 3}
       propertyPath: resistences.Array.data[2]
-      value: 0.2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7126289095999571629, guid: ae36ba9988567b44a9b3dc7d3835466a, type: 3}
       propertyPath: brokenresistenes.Array.data[1]
-      value: 2
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 7126289095999571629, guid: ae36ba9988567b44a9b3dc7d3835466a, type: 3}
       propertyPath: brokenresistenes.Array.data[2]

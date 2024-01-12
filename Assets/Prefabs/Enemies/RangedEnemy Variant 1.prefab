@@ -26,11 +26,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3958813179423068378, guid: a73c265b18f27ee489aa5c0932838146, type: 3}
       propertyPath: resistences.Array.data[1]
-      value: 2
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 3958813179423068378, guid: a73c265b18f27ee489aa5c0932838146, type: 3}
       propertyPath: resistences.Array.data[2]
-      value: 0.4
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3958813179423068378, guid: a73c265b18f27ee489aa5c0932838146, type: 3}
       propertyPath: brokenresistenes.Array.data[1]
@@ -45,9 +45,17 @@ PrefabInstance:
       value: RangedEnemy Variant 1
       objectReference: {fileID: 0}
     - target: {fileID: 5181615403427822687, guid: a73c265b18f27ee489aa5c0932838146, type: 3}
+      propertyPath: speed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5181615403427822687, guid: a73c265b18f27ee489aa5c0932838146, type: 3}
       propertyPath: bullet
       value: 
       objectReference: {fileID: 2454942241941172382, guid: 9947d1862420aa24db149faff5f13991, type: 3}
+    - target: {fileID: 5181615403427822687, guid: a73c265b18f27ee489aa5c0932838146, type: 3}
+      propertyPath: firingRate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7282447982017150825, guid: a73c265b18f27ee489aa5c0932838146, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

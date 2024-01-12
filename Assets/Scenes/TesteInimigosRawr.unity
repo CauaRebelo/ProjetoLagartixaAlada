@@ -616,6 +616,10 @@ PrefabInstance:
       value: -0.96
       objectReference: {fileID: 0}
     - target: {fileID: 8181496507599946441, guid: 0f72d12f073c03d4e8b664a7af33a5d2, type: 3}
+      propertyPath: attackDowntime
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8181496507599946441, guid: 0f72d12f073c03d4e8b664a7af33a5d2, type: 3}
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 365704564}
