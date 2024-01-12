@@ -1302,6 +1302,7 @@ GameObject:
   - component: {fileID: 4318026029431809744}
   - component: {fileID: 9152648286196927735}
   - component: {fileID: 4775979764383040564}
+  - component: {fileID: 7799552825290696865}
   m_Layer: 15
   m_Name: Enemy
   m_TagString: Enemy
@@ -1466,6 +1467,7 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   enemy: {fileID: 7801798793507905151}
   attack: {fileID: 4951706407319633515}
+  enemyDamage: {fileID: 4775979764383040564}
   waypoints:
   - {fileID: 8460270363679255312}
   - {fileID: 218678771750803765}
@@ -1494,6 +1496,7 @@ MonoBehaviour:
   healthBar: {fileID: 7938010007466118958}
   toleranceBar: {fileID: 9061982250047996188}
   rb: {fileID: 2795843175135887898}
+  speedMultiplier: 1
   health: 160
   maxHealth: 160
   tolerance: 60
@@ -1510,6 +1513,21 @@ MonoBehaviour:
   - 1
   - 1
   - 1.25
+--- !u!114 &7799552825290696865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7396381746139540952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 873de4d73a96aef4eb9caa92bceea905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyDamage: {fileID: 4775979764383040564}
+  burnInterval: 0.5
+  slowInterval: 2
 --- !u!1 &7801798793507905151
 GameObject:
   m_ObjectHideFlags: 0
