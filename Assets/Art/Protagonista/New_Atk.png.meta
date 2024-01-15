@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cf77c1bcd93ac884c9998b93b3d4d7f8
+guid: 9a032a5960344304a86826c00be4d754
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -81,33 +81,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -136,55 +110,139 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Idle_0
+      name: New_Atk_0
       rect:
         serializedVersion: 2
-        x: 41
-        y: 2
-        width: 459
-        height: 874
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 411
+        y: 1706
+        width: 973
+        height: 1059
+      alignment: 9
+      pivot: {x: 0.24623476, y: 0.40340653}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e59e8e5d519c1e54782900fbab709c0d
-      internalID: 100233034
+      spriteID: c065ae6b72c9ec047bba3645bcb5c771
+      internalID: -668338589
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_1
+      name: New_Atk_1
       rect:
         serializedVersion: 2
-        x: 573
-        y: 2
-        width: 459
-        height: 874
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 2431
+        y: 1766
+        width: 973
+        height: 1059
+      alignment: 9
+      pivot: {x: 0.18460645, y: 0.44337642}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a87723b682b51f54eaafc4be93534b76
-      internalID: -1108034779
+      spriteID: dfb4cc016fba9594d9b01db50ecb4723
+      internalID: 1340155142
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_2
+      name: New_Atk_2
       rect:
         serializedVersion: 2
-        x: 1105
-        y: 2
-        width: 459
-        height: 874
+        x: 4442
+        y: 1724
+        width: 973
+        height: 1059
+      alignment: 9
+      pivot: {x: 0.18098071, y: 0.4367148}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d454792353620564cb36c083eebc8e89
+      internalID: -721835970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New_Atk_3
+      rect:
+        serializedVersion: 2
+        x: 687
+        y: 234
+        width: 973
+        height: 1059
+      alignment: 9
+      pivot: {x: 0.17735562, y: 0.43338385}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f979f385327e36f49b96fa6de8de2a0e
+      internalID: -238022213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New_Atk_4
+      rect:
+        serializedVersion: 2
+        x: 2875
+        y: 224
+        width: 973
+        height: 1059
+      alignment: 9
+      pivot: {x: 0.1773555, y: 0.43005314}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27e57b61e94f19e4bba89792a0e7ce2a
+      internalID: 1590777721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New_Atk_5
+      rect:
+        serializedVersion: 2
+        x: 4637
+        y: 258
+        width: 973
+        height: 1059
+      alignment: 9
+      pivot: {x: 0.17373027, y: 0.4200606}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16e7eb4f9252f4f4c9e8a54913a7a68b
+      internalID: 1472216569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New_Atk_6
+      rect:
+        serializedVersion: 2
+        x: 4614
+        y: 123
+        width: 14
+        height: 97
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,8 +250,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e229114b8c548f146b82422c891f2834
-      internalID: 1471724648
+      spriteID: 18f57cd0b623b6940b8e179e9478d4f9
+      internalID: 345510735
       vertices: []
       indices: 
       edges: []
@@ -209,9 +267,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Idle_0: 100233034
-      Idle_1: -1108034779
-      Idle_2: 1471724648
+      New_Atk_0: -668338589
+      New_Atk_1: 1340155142
+      New_Atk_2: -721835970
+      New_Atk_3: -238022213
+      New_Atk_4: 1590777721
+      New_Atk_5: 1472216569
+      New_Atk_6: 345510735
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
