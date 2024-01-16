@@ -353,6 +353,7 @@ GameObject:
   - component: {fileID: 1659471982433229672}
   - component: {fileID: 3847532658337803745}
   - component: {fileID: 5910354983738595368}
+  - component: {fileID: 8527786168120564724}
   m_Layer: 11
   m_Name: Player
   m_TagString: Untagged
@@ -550,7 +551,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 668933761629744693}
-  healthBar: {fileID: 0}
   spawnPoint: {fileID: 8498580086664924740}
   sprite: {fileID: 1687487685553306311}
   playerReflect: {fileID: 6079165845137629092}
@@ -592,6 +592,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agentAnimator: {fileID: 3847532658337803745}
+--- !u!114 &8527786168120564724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668933761629744693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a3f8475be766584e810a5dd108c8874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerDamage: {fileID: 1659471982433229672}
+  numOfHearts: 6
+  hearts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  fullHeart: {fileID: 2062906075, guid: de6df3b0ef154d243aee1cf665e1cd1a, type: 3}
+  emptyHeart: {fileID: -1624687290, guid: de6df3b0ef154d243aee1cf665e1cd1a, type: 3}
 --- !u!1 &1478677450368274157
 GameObject:
   m_ObjectHideFlags: 0
