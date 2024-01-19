@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 52370d3d71ceeaa4cac329b3640d6f25
+guid: b9811275eed0f1b4382a87e5634d4ccd
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,64 +110,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Reflect_0
+      name: Reflect 1_0
       rect:
         serializedVersion: 2
-        x: 957
-        y: 933
-        width: 710
+        x: 883
+        y: 1651
+        width: 715
         height: 1069
       alignment: 9
-      pivot: {x: 0.32702413, y: 0.40070626}
+      pivot: {x: 0.2176442, y: 0.3776088}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b66e92dd1592f0d4895c3d6a26c1b6c7
-      internalID: 1934935364
+      spriteID: f472c55f8b6d51e41aa89476f37b7474
+      internalID: -368388231
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Reflect_1
+      name: Reflect 1_1
       rect:
         serializedVersion: 2
-        x: 2710
-        y: 895
-        width: 710
+        x: 2638
+        y: 1613
+        width: 715
         height: 1069
       alignment: 9
-      pivot: {x: 0.31708813, y: 0.39619672}
+      pivot: {x: 0.25916672, y: 0.37205434}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30bd659bbf2b3b24cac17fdf20a728b2
-      internalID: -77303550
+      spriteID: b8ba0604f6f1c30499a65ddd02d365dc
+      internalID: 184383749
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Reflect_3
+      name: Reflect 1_3
       rect:
         serializedVersion: 2
-        x: 4374
-        y: 972
-        width: 710
+        x: 4298
+        y: 1689
+        width: 715
         height: 1069
       alignment: 9
-      pivot: {x: 0.39628837, y: 0.41841477}
+      pivot: {x: 0.24592848, y: 0.40763628}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 37dbc404871a9464ba4f61dd4fd134d6
-      internalID: -781768612
+      spriteID: 3630306c600f5314b9ce0960bee3690e
+      internalID: 436671093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reflect 1_6
+      rect:
+        serializedVersion: 2
+        x: 2301
+        y: 209
+        width: 715
+        height: 1069
+      alignment: 9
+      pivot: {x: 0.32593048, y: 0.41181567}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4260df7f7e176342a1edb392b8d3a38
+      internalID: 1316486168
       vertices: []
       indices: 
       edges: []
@@ -183,12 +204,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Reflect_0: 1934935364
-      Reflect_1: -77303550
-      Reflect_2: 1581313507
-      Reflect_3: -781768612
-      Reflect_4: -561574489
-      Reflect_5: -1185568915
+      Reflect 1_0: -368388231
+      Reflect 1_1: 184383749
+      Reflect 1_2: -885771271
+      Reflect 1_3: 436671093
+      Reflect 1_4: -606561084
+      Reflect 1_5: 566806836
+      Reflect 1_6: 1316486168
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
