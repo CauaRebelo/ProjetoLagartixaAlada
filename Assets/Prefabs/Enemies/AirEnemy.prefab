@@ -920,6 +920,9 @@ MonoBehaviour:
   enemyDamage: {fileID: 7189154064158123691}
   burnInterval: 0.5
   slowInterval: 2
+  chainInterval: 1
+  chainLightingEffect: {fileID: 5087975491568196007, guid: 42b7105b5a3d1dc44ac1b80ed1dae9d0, type: 3}
+  chainLightingCooldown: {fileID: 4169038257445751200, guid: dee8fb7b1407d9140bd54b947e53222f, type: 3}
 --- !u!1 &2114401673650103318
 GameObject:
   m_ObjectHideFlags: 0

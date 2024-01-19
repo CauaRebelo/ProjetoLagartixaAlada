@@ -6,6 +6,8 @@ public class StatusAttack : MonoBehaviour
 {
     
     public StatusEffects.DebuffsType debuff;
+    public float effectVariable1;
+    public float effectVariable2;
 
     void Start()
     {
@@ -17,7 +19,7 @@ public class StatusAttack : MonoBehaviour
     {
         if (col.gameObject.tag == "Enemy")
         {
-            col.gameObject.GetComponent<StatusEffects>().HandleStatusEffect(debuff);
+            col.gameObject.GetComponent<StatusEffects>().HandleStatusEffect(debuff, effectVariable1, effectVariable2);
         }
     }
 }

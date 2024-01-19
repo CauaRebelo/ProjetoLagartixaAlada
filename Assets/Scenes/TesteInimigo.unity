@@ -282,7 +282,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1478677450368274157, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1092099281}
   m_SourcePrefab: {fileID: 100100000, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
 --- !u!1 &128852983
 GameObject:
@@ -2171,6 +2174,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1092099276 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1478677450368274157, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
+  m_PrefabInstance: {fileID: 111334802}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1092099281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092099276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c800b1fdedd5b74baed34c4ecec6048, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debuff: 3
+  effectVariable1: 2
+  effectVariable2: 5
 --- !u!1 &1170916241
 GameObject:
   m_ObjectHideFlags: 0
