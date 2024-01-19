@@ -1628,8 +1628,8 @@ MonoBehaviour:
   checkPoint: {x: 0, y: 0}
   nextPoints: 0
   chaseDistance: 7
-  attackDistance: 10
-  attackSpeed: 0.6
+  attackDistance: 8
+  attackSpeed: 2
   attackDowntime: 4
   isChasing: 0
   isAttacking: 0

@@ -37,9 +37,9 @@ public class PlayerMovement : MonoBehaviour
     private Coroutine attackCo;
     public bool canAttack = true;
     public bool hitEnemy = false;
-    private bool spamAttack = false;
-    private bool spamLongAttack = false;
-    private bool spamVerticalAttack = false;
+    public bool spamAttack = false;
+    public bool spamLongAttack = false;
+    public bool spamVerticalAttack = false;
     private float attackCooldown = 0.3f;
     private float horizontalAttackCooldown = 0.5f;
     private float verticalAttackAirCooldown = 0.45f;
@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
     public int pontosArvore;
     //textoArvore.SetText("Pontos: " + pontosArvore.ToString());
 
-    private bool canDash = true;
+    public bool canDash = true;
     public bool isAbleToAct = true;
     private float dashingPower = 24f;
     private float dashingTime = 0.2f;
@@ -295,11 +295,11 @@ public class PlayerMovement : MonoBehaviour
                 {
                     attackHitbox.AddComponent<StatusAttack>();
                     attackHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Slow;
-                    attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 30;
+                    attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 0.7f;
                     attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 5;
                     if (abilityTree[0, 5])
                     {
-                        attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 40;
+                        attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 0.6f;
                         attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 6;
                     }
                 }
@@ -373,11 +373,11 @@ public class PlayerMovement : MonoBehaviour
                 {
                     attackHitbox.AddComponent<StatusAttack>();
                     attackHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Slow;
-                    attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 25;
+                    attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 0.75f;
                     attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 5;
                     if (abilityTree[0, 5])
                     {
-                        attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 30;
+                        attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 0.7f;
                     }
                 }
                 break;
@@ -445,11 +445,11 @@ public class PlayerMovement : MonoBehaviour
                 {
                     attackHitbox.AddComponent<StatusAttack>();
                     attackHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Slow;
-                    attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 20;
+                    attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 0.80f;
                     attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 5;
                     if (abilityTree[0, 5])
                     {
-                        attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 25;
+                        attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 0.75f;
                     }
                 }
                 break;
@@ -536,11 +536,11 @@ public class PlayerMovement : MonoBehaviour
                 {
                     attackHitbox.AddComponent<StatusAttack>();
                     attackHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Slow;
-                    attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 20;
+                    attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 0.8f;
                     attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 5;
                     if (abilityTree[0, 5])
                     {
-                        attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 25;
+                        attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 0.75f;
                     }
                 }
                 break;
@@ -611,11 +611,11 @@ public class PlayerMovement : MonoBehaviour
                     //Reflect de Gelo 1
                     ripositeHitbox.AddComponent<StatusAttack>();
                     ripositeHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Slow;
-                    ripositeHitbox.GetComponent<StatusAttack>().effectVariable1 = 50;
+                    ripositeHitbox.GetComponent<StatusAttack>().effectVariable1 = 0.5f;
                     ripositeHitbox.GetComponent<StatusAttack>().effectVariable2 = 10;
                     if (abilityTree[0, 1])
                     {
-                        ripositeHitbox.GetComponent<StatusAttack>().effectVariable1 = 70;
+                        ripositeHitbox.GetComponent<StatusAttack>().effectVariable1 = 0.3f;
                         ripositeHitbox.GetComponent<StatusAttack>().effectVariable2 = 12;
                     }
                 }

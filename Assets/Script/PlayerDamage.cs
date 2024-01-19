@@ -63,6 +63,13 @@ public class PlayerDamage : MonoBehaviour
         canvas.gameObject.SetActive(true);
         health = 0;
         Time.timeScale = 1f;
+        playerMovement.canAttack = true;
+        playerMovement.canMove = true;
+        playerMovement.isAbleToAct = true;
+        playerMovement.canDash = true;
+        playerMovement.spamAttack = false;
+        playerMovement.spamLongAttack = false;
+        playerMovement.spamVerticalAttack = false;
         OnDamage?.Invoke(false);
         iframe = false;
         EventSystem.current.Death();
