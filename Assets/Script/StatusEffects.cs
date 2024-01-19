@@ -16,10 +16,12 @@ public class StatusEffects : MonoBehaviour
 
     private bool isBurning;
     private float burnTicks;
+    private float currentBurnDamage;
     public float burnInterval = 0.5f;
 
     private bool isSlow;
     private float slowTicks;
+    private float currentSlowAmount;
     public float slowInterval = 2f;
 
     private bool[] isChainlight = new bool[3] {false, false, false};
@@ -67,12 +69,18 @@ public class StatusEffects : MonoBehaviour
             {
                 burnTicks = ticks;
             }
+
+            if(currentBurnDamage < damage)
+            {
+                currentBurnDamage = damage;
+            }
         }
         else
         {
             isBurning = true;
             burnTicks = ticks;
-            StartCoroutine(BurnDamage(damage));
+            currentBurnDamage = damage;
+            StartCoroutine(BurnDamage());
         }
     }
 
@@ -84,12 +92,17 @@ public class StatusEffects : MonoBehaviour
             {
                 slowTicks = ticks;
             }
+            if(currentSlowAmount < slowAmount)
+            {
+                currentSlowAmount = slowAmount;
+            }
         }
         else
         {
             slowTicks = ticks;
             isSlow = true;
-            StartCoroutine(SlowTime(slowAmount));
+            currentSlowAmount = slowAmount;
+            StartCoroutine(SlowTime());
         }
     }
 
@@ -112,22 +125,22 @@ public class StatusEffects : MonoBehaviour
         }
     }
 
-    IEnumerator BurnDamage(float damage)
+    IEnumerator BurnDamage()
     {
         while(burnTicks > 0)
         {
             burnTicks--;
-            enemyDamage.Damage(2, damage, 0, 0, 0);
+            enemyDamage.Damage(2, currentBurnDamage, 0, 0, 0);
             yield return new WaitForSeconds(burnInterval);
         }
         isBurning = false;
     }
 
-    IEnumerator SlowTime(float slowAmount)
+    IEnumerator SlowTime()
     {
-        enemyDamage.speedMultiplier = slowAmount;
         while (slowTicks > 0)
         {
+            enemyDamage.speedMultiplier = currentSlowAmount;
             slowTicks--;
             yield return new WaitForSeconds(slowInterval);
         }

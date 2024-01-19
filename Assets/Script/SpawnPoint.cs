@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SpawnPoint : MonoBehaviour
 {
+    [field: SerializeField]
+    public UnityEvent<bool> OnLit { get; set; }
 
     [SerializeField] private Transform spawnTransform;
 
@@ -15,6 +18,7 @@ public class SpawnPoint : MonoBehaviour
         {
             if(!used)
             {
+                OnLit?.Invoke(true);
                 col.gameObject.transform.parent.gameObject.GetComponent<PlayerDamage>().spawnPoint = spawnTransform;
                 used = true;
             }

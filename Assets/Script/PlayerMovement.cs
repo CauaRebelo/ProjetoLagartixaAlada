@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private GameObject normalAttack;
+    [SerializeField] private GameObject attackHitbox;
     [SerializeField] private GameObject playerHitbox;
     [SerializeField] private GameObject ripositeHitbox;
     [SerializeField] private TrailRenderer trail;
@@ -23,7 +25,8 @@ public class PlayerMovement : MonoBehaviour
     private int maxEnchantment;
     public float damage= 1f;
 
-    public bool[,] abilityTree = {{ false, false, false, false, false, false, false, false, false, false, false, false }, { false, false, false, false, false, false, false, false, false, false, false, false }, { false, false, false, false, false, false, false, false, false, false, false, false }, };
+    //private TreeController treeController = TreeController.Instance;
+    public bool[,] abilityTree = {{ false, false, false, false, false, false}, {false, false, false, false, false, false}, {false, false, false, false, false, false}, };
 
     public bool canMove = true;
     private float horizontal;
@@ -42,6 +45,10 @@ public class PlayerMovement : MonoBehaviour
     private float verticalAttackAirCooldown = 0.45f;
     private float verticalAttackCooldown = 0.5f;
     private Animator attackAnim;
+
+    public TMP_Text textoArvore;
+    public int pontosArvore;
+    //textoArvore.SetText("Pontos: " + pontosArvore.ToString());
 
     private bool canDash = true;
     public bool isAbleToAct = true;
@@ -82,7 +89,9 @@ public class PlayerMovement : MonoBehaviour
         //EventSystem.current.onPlayerDamage += OnPlayerDamage;
 
         maxEnchantment = 4;
+        pontosArvore = 1;
         attackAnim = normalAttack.GetComponent<Animator>();
+        textoArvore.SetText("Pontos Disponiveis: " + pontosArvore.ToString());
     }
 
     // Update is called once per frame
@@ -217,84 +226,31 @@ public class PlayerMovement : MonoBehaviour
             case 0:
                 break;
             case 1:
-                if (abilityTree[0,4])
-                {
-                    //Dash de Gelo 1
-                    playerHitbox.AddComponent<StatusAttack>();
-                    playerHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Slow;
-                    if (abilityTree[0, 6])
-                    {
-                        //Dash de Gelo 3
-                    }
-                    else if(abilityTree[0, 7])
-                    {
-                        //Dash de Gelo 4;
-                    }
-                }
-                else if(abilityTree[0, 5])
+                if(abilityTree[0, 2])
                 {
                     Instantiate(dashaoe_prefab_ice, transform.position + new Vector3(0 + 1 * transform.localScale.x, 0 , 0), Quaternion.identity);
-                    if (abilityTree[0, 6])
+                    if (abilityTree[0, 3])
                     {
                         //Dash de Gelo 3
-                    }
-                    else if (abilityTree[0, 7])
-                    {
-                        //Dash de Gelo 4;
                     }
                 }
                 break;
             case 2:
-                if (abilityTree[1, 4])
-                {
-                    //Dash de Fogo 1
-                    playerHitbox.AddComponent<StatusAttack>();
-                    playerHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Burning;
-                    Debug.Log("Funcionou!");
-                    if (abilityTree[1, 6])
-                    {
-                        //Dash de Fogo 3
-                    }
-                    else if (abilityTree[1, 7])
-                    {
-                        //Dash de Fogo 4;
-                    }
-                }
-                else if (abilityTree[1, 5])
+                if (abilityTree[1, 2])
                 {
                     Instantiate(dashaoe_prefab_fire, transform.position + new Vector3(0 + 1 * transform.localScale.x, 0, 0), Quaternion.identity);
                     Debug.Log("Funcionou!");
-                    if (abilityTree[1, 6])
+                    if (abilityTree[1, 3])
                     {
                         //Dash de Fogo 3
-                    }
-                    else if (abilityTree[1, 7])
-                    {
-                        //Dash de Fogo 4;
                     }
                 }
                 break;
             case 3:
-                if (abilityTree[2, 4])
-                {
-                    //Dash de Raio 1
-                    if (abilityTree[2, 6])
-                    {
-                        //Dash de Raio 3
-                    }
-                    else if (abilityTree[2, 7])
-                    {
-                        //Dash de Raio 4;
-                    }
-                }
-                else if (abilityTree[2, 5])
+                if (abilityTree[2, 2])
                 {
                     Instantiate(dashaoe_prefab_light, transform.position + new Vector3(0 + 1 * transform.localScale.x, 0, 0), Quaternion.identity);
-                    if (abilityTree[2, 6])
-                    {
-                        //Dash de Raio 3
-                    }
-                    else if (abilityTree[2, 7])
+                    if (abilityTree[2, 3])
                     {
                         //Dash de Raio 3
                     }
@@ -330,6 +286,52 @@ public class PlayerMovement : MonoBehaviour
         {
             playerDamage.iframe = false;
         }
+        switch (enchantment)
+        {
+            case 0:
+                break;
+            case 1:
+                if(abilityTree[0, 4])
+                {
+                    attackHitbox.AddComponent<StatusAttack>();
+                    attackHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Slow;
+                    attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 30;
+                    attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 5;
+                    if (abilityTree[0, 5])
+                    {
+                        attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 40;
+                        attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 6;
+                    }
+                }
+                break;
+            case 2:
+                if (abilityTree[1, 4])
+                {
+                    attackHitbox.AddComponent<StatusAttack>();
+                    attackHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Burning;
+                    attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 4;
+                    attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 5;
+                    Debug.Log("Funcionou!");
+                    if (abilityTree[1, 5])
+                    {
+                        attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 6;
+                    }
+                }
+                break;
+            case 3:
+                if (abilityTree[2, 4])
+                {
+                    attackHitbox.AddComponent<StatusAttack>();
+                    attackHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Chainlight;
+                    attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 2;
+                    attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 15;
+                    if (abilityTree[2, 5])
+                    {
+                        attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 25;
+                    }
+                }
+                break;
+        }
         OnAttack?.Invoke(false);
         OnVerticalAttack?.Invoke(false);
         rb.velocity = Vector2.zero;
@@ -340,6 +342,7 @@ public class PlayerMovement : MonoBehaviour
         rb.drag = 0;
         OnLongAttack?.Invoke(false);
         spamLongAttack = false;
+        Destroy(attackHitbox.GetComponent<StatusAttack>());
         normalAttack.SetActive(false);
         isAbleToAct = true;
         canMove = true;
@@ -361,6 +364,51 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
         }
+        switch (enchantment)
+        {
+            case 0:
+                break;
+            case 1:
+                if(abilityTree[0, 4])
+                {
+                    attackHitbox.AddComponent<StatusAttack>();
+                    attackHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Slow;
+                    attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 25;
+                    attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 5;
+                    if (abilityTree[0, 5])
+                    {
+                        attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 30;
+                    }
+                }
+                break;
+            case 2:
+                if (abilityTree[1, 4])
+                {
+                    attackHitbox.AddComponent<StatusAttack>();
+                    attackHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Burning;
+                    attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 3;
+                    attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 4;
+                    Debug.Log("Funcionou!");
+                    if (abilityTree[1, 5])
+                    {
+                        attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 4;
+                    }
+                }
+                break;
+            case 3:
+                if (abilityTree[2, 4])
+                {
+                    attackHitbox.AddComponent<StatusAttack>();
+                    attackHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Chainlight;
+                    attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 2;
+                    attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 12;
+                    if (abilityTree[2, 5])
+                    {
+                        attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 20;
+                    }
+                }
+                break;
+        }
         OnAttack?.Invoke(false);
         OnLongAttack?.Invoke(false);
         normalAttack.SetActive(true);
@@ -370,6 +418,7 @@ public class PlayerMovement : MonoBehaviour
         rb.drag = 0;
         OnVerticalAttack?.Invoke(false);
         normalAttack.SetActive(false);
+        Destroy(attackHitbox.GetComponent<StatusAttack>());
         spamVerticalAttack = false;
         isAbleToAct = true;
         canMove = true;
@@ -387,6 +436,51 @@ public class PlayerMovement : MonoBehaviour
         {
             playerDamage.iframe = false;
         }
+        switch (enchantment)
+        {
+            case 0:
+                break;
+            case 1:
+                if(abilityTree[0, 4])
+                {
+                    attackHitbox.AddComponent<StatusAttack>();
+                    attackHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Slow;
+                    attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 20;
+                    attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 5;
+                    if (abilityTree[0, 5])
+                    {
+                        attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 25;
+                    }
+                }
+                break;
+            case 2:
+                if (abilityTree[1, 4])
+                {
+                    attackHitbox.AddComponent<StatusAttack>();
+                    attackHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Burning;
+                    attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 2;
+                    attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 4;
+                    Debug.Log("Funcionou!");
+                    if (abilityTree[1, 5])
+                    {
+                        attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 3;
+                    }
+                }
+                break;
+            case 3:
+                if (abilityTree[2, 4])
+                {
+                    attackHitbox.AddComponent<StatusAttack>();
+                    attackHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Chainlight;
+                    attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 2;
+                    attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 10;
+                    if (abilityTree[2, 5])
+                    {
+                        attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 15;
+                    }
+                }
+                break;
+        }
         rb.velocity = Vector2.zero;
         OnAttack?.Invoke(false);
         OnLongAttack?.Invoke(false);
@@ -403,6 +497,7 @@ public class PlayerMovement : MonoBehaviour
         rb.drag = 0;
         normalAttack.SetActive(false);
         OnVerticalAttack?.Invoke(false);
+        Destroy(attackHitbox.GetComponent<StatusAttack>());
         spamVerticalAttack = false;
         isAbleToAct = true;
         canMove = true;
@@ -432,6 +527,51 @@ public class PlayerMovement : MonoBehaviour
         {
             playerDamage.iframe = false;
         }
+        switch (enchantment)
+        {
+            case 0:
+                break;
+            case 1:
+                if(abilityTree[0, 4])
+                {
+                    attackHitbox.AddComponent<StatusAttack>();
+                    attackHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Slow;
+                    attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 20;
+                    attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 5;
+                    if (abilityTree[0, 5])
+                    {
+                        attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 25;
+                    }
+                }
+                break;
+            case 2:
+                if (abilityTree[1, 4])
+                {
+                    attackHitbox.AddComponent<StatusAttack>();
+                    attackHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Burning;
+                    attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 2;
+                    attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 4;
+                    Debug.Log("Funcionou!");
+                    if (abilityTree[1, 5])
+                    {
+                        attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 3;
+                    }
+                }
+                break;
+            case 3:
+                if (abilityTree[2, 4])
+                {
+                    attackHitbox.AddComponent<StatusAttack>();
+                    attackHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Chainlight;
+                    attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 2;
+                    attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 10;
+                    if (abilityTree[2, 5])
+                    {
+                        attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 15;
+                    }
+                }
+                break;
+        }
         rb.velocity = Vector2.zero;
         OnLongAttack?.Invoke(false);
         OnVerticalAttack?.Invoke(false);
@@ -441,6 +581,7 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(attackCooldown);
         rb.drag = 0;
         OnAttack?.Invoke(false);
+        Destroy(attackHitbox.GetComponent<StatusAttack>());
         spamAttack = false;
         normalAttack.SetActive(false);
         isAbleToAct = true;
@@ -470,25 +611,12 @@ public class PlayerMovement : MonoBehaviour
                     //Reflect de Gelo 1
                     ripositeHitbox.AddComponent<StatusAttack>();
                     ripositeHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Slow;
-                    if (abilityTree[0, 2])
+                    ripositeHitbox.GetComponent<StatusAttack>().effectVariable1 = 50;
+                    ripositeHitbox.GetComponent<StatusAttack>().effectVariable2 = 10;
+                    if (abilityTree[0, 1])
                     {
-                        //Reflect de Gelo 3
-                    }
-                    else if (abilityTree[0, 3])
-                    {
-                        //Reflect de Gelo 4;
-                    }
-                }
-                else if (abilityTree[0, 1])
-                {
-                    //Reflect de Gelo 2
-                    if (abilityTree[0, 2])
-                    {
-                        //Reflect de Gelo 3
-                    }
-                    else if (abilityTree[0, 3])
-                    {
-                        //Reflect de Gelo 4
+                        ripositeHitbox.GetComponent<StatusAttack>().effectVariable1 = 70;
+                        ripositeHitbox.GetComponent<StatusAttack>().effectVariable2 = 12;
                     }
                 }
                 break;
@@ -498,25 +626,11 @@ public class PlayerMovement : MonoBehaviour
                     //Reflect de Fogo 1
                     ripositeHitbox.AddComponent<StatusAttack>();
                     ripositeHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Burning;
-                    if (abilityTree[1, 2])
+                    ripositeHitbox.GetComponent<StatusAttack>().effectVariable1 = 5;
+                    ripositeHitbox.GetComponent<StatusAttack>().effectVariable2 = 10;
+                    if (abilityTree[1, 1])
                     {
-                        //Reflect de Fogo 3
-                    }
-                    else if (abilityTree[1, 3])
-                    {
-                        //Reflect de Fogo 4;
-                    }
-                }
-                else if (abilityTree[1, 1])
-                {
-                    //Reflect de Fogo 2
-                    if (abilityTree[1, 2])
-                    {
-                        //Reflect de Fogo 3
-                    }
-                    else if (abilityTree[1, 3])
-                    {
-                        //Reflect de Fogo 4;
+                        ripositeHitbox.GetComponent<StatusAttack>().effectVariable1 = 10;
                     }
                 }
                 break;
@@ -524,25 +638,13 @@ public class PlayerMovement : MonoBehaviour
                 if (abilityTree[2, 0])
                 {
                     //Reflect de Raio 1
-                    if (abilityTree[2, 2])
+                    ripositeHitbox.AddComponent<StatusAttack>();
+                    ripositeHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Chainlight;
+                    ripositeHitbox.GetComponent<StatusAttack>().effectVariable1 = 1;
+                    ripositeHitbox.GetComponent<StatusAttack>().effectVariable2 = 20;
+                    if (abilityTree[2, 1])
                     {
-                        //Reflect de Raio 3
-                    }
-                    else if (abilityTree[2, 3])
-                    {
-                        //Reflect de Raio 4;
-                    }
-                }
-                else if (abilityTree[2, 1])
-                {
-                    //Reflect de Raio 2
-                    if (abilityTree[2, 2])
-                    {
-                        //Reflect de Raio 3
-                    }
-                    else if (abilityTree[2, 3])
-                    {
-                        //Reflect de Raio 4;
+                        ripositeHitbox.GetComponent<StatusAttack>().effectVariable2 = 50;
                     }
                 }
                 break;
@@ -560,9 +662,25 @@ public class PlayerMovement : MonoBehaviour
         canMove = true;
     }
 
+    public void TreePoint(int amount)
+    {
+        pontosArvore += amount;
+        textoArvore.SetText("Pontos Disponiveis: " + pontosArvore.ToString());
+    }
+
+    public bool checkTree(int aux1, int aux2)
+    {
+        return abilityTree[aux1, aux2];
+    }
+
     public void unlockSkill(int enchant)
     {
-        abilityTree[enchant/10, enchant%10] = true;
-        Debug.Log(enchant%10);
+        if(pontosArvore > 0)
+        {
+            abilityTree[enchant/10, enchant%10] = true;
+            Debug.Log(enchant%10);
+            pontosArvore -= 1;
+            textoArvore.SetText("Pontos Disponiveis: " + pontosArvore.ToString());
+        }
     }
 }

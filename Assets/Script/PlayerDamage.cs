@@ -13,6 +13,7 @@ public class PlayerDamage : MonoBehaviour
     public Transform spawnPoint;
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private PlayerReflect playerReflect;
+    [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private Canvas canvas;
 
     public bool parrying = false;
@@ -78,9 +79,11 @@ public class PlayerDamage : MonoBehaviour
     {
         iframe = true;
         OnDamage?.Invoke(true);
+        playerMovement.isAbleToAct = false;
         Time.timeScale = 0.1f;
         yield return new WaitForSecondsRealtime(0.3f);
         Time.timeScale = 1f;
+        playerMovement.isAbleToAct = true;
         OnDamage?.Invoke(false);
         yield return new WaitForSeconds(immuneTime);
         iframe = false;
