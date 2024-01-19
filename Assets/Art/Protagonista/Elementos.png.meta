@@ -118,7 +118,7 @@ TextureImporter:
         width: 24
         height: 37
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -139,7 +139,7 @@ TextureImporter:
         width: 19
         height: 21
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -160,7 +160,7 @@ TextureImporter:
         width: 29
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -168,6 +168,27 @@ TextureImporter:
       bones: []
       spriteID: 80157807e5ad7284cbc63045eed0eef7
       internalID: -1295049484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elementos_3
+      rect:
+        serializedVersion: 2
+        x: 3642
+        y: 2022
+        width: 198
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c2d5bc19c8fb6c44aacf85d52f87672
+      internalID: -137413738
       vertices: []
       indices: 
       edges: []
@@ -186,6 +207,7 @@ TextureImporter:
       Elementos_0: -1919839389
       Elementos_1: -2048830982
       Elementos_2: -1295049484
+      Elementos_3: -137413738
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
