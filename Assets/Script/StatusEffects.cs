@@ -15,14 +15,17 @@ public class StatusEffects : MonoBehaviour
     }
 
     private bool isBurning;
-    private int burnTicks;
+    private float burnTicks;
     public float burnInterval = 0.5f;
 
     private bool isSlow;
-    private int slowTicks;
+    private float slowTicks;
     public float slowInterval = 2f;
 
-    //private bool isChainlight;
+    private bool[] isChainlight = new bool[3] {false, false, false};
+    public float chainInterval = 1f;
+    public GameObject chainLightingEffect;
+    public GameObject chainLightingCooldown;
 
 
     // Start is called before the first frame update
@@ -30,7 +33,6 @@ public class StatusEffects : MonoBehaviour
     {
         isBurning = false;
         isSlow = false;
-        //isChainlight = false;
     }
 
     // Update is called once per frame
@@ -39,66 +41,91 @@ public class StatusEffects : MonoBehaviour
         
     }
 
-    public void HandleStatusEffect(DebuffsType debufftype)
+    public void HandleStatusEffect(DebuffsType debufftype, float effectVariable1, float effectVariable2)
     {
         switch (debufftype) 
         {
             case (DebuffsType.None):
                 break;
             case (DebuffsType.Burning):
-                Burning();
+                Burning(effectVariable1, effectVariable2);
                 break;
             case (DebuffsType.Slow):
-                Slow();
+                Slow(effectVariable1, effectVariable2);
                 break;
             case (DebuffsType.Chainlight):
-                //Codigo;
+                Lighting(effectVariable1, effectVariable2);
                 break;
         }
     }
 
-    void Burning()
+    void Burning(float damage, float ticks)
     {
         if(isBurning)
         {
-            burnTicks = 12;
+            if(burnTicks < ticks)
+            {
+                burnTicks = ticks;
+            }
         }
         else
         {
             isBurning = true;
-            burnTicks = 12;
-            StartCoroutine(BurnDamage());
+            burnTicks = ticks;
+            StartCoroutine(BurnDamage(damage));
         }
     }
 
-    void Slow()
+    void Slow(float slowAmount, float ticks)
     {
         if (isSlow)
         {
-            slowTicks = 3;
+            if(slowTicks < ticks)
+            {
+                slowTicks = ticks;
+            }
         }
         else
         {
-            slowTicks = 3;
+            slowTicks = ticks;
             isSlow = true;
-            StartCoroutine(SlowTime());
+            StartCoroutine(SlowTime(slowAmount));
         }
     }
 
-    IEnumerator BurnDamage()
+    void Lighting(float type, float damage)
+    {
+        int index = (int) type;
+        if (isChainlight[index])
+        {
+            return;
+        }
+        else
+        {
+            isChainlight[index] = true;
+            enemyDamage.Damage(3, damage, 0, 0, 0);
+            Instantiate(chainLightingCooldown, enemyDamage.gameObject.transform);
+            chainLightingEffect.GetComponent<ChainlightingScript>().damage = damage;
+            chainLightingEffect.GetComponent<ChainlightingScript>().chainAmount = 5;
+            Instantiate(chainLightingEffect, enemyDamage.gameObject.transform.position, Quaternion.identity);
+            StartCoroutine(LightingCooldown(index));
+        }
+    }
+
+    IEnumerator BurnDamage(float damage)
     {
         while(burnTicks > 0)
         {
             burnTicks--;
-            enemyDamage.Damage(2, 2, 0, 0, 0);
+            enemyDamage.Damage(2, damage, 0, 0, 0);
             yield return new WaitForSeconds(burnInterval);
         }
         isBurning = false;
     }
 
-    IEnumerator SlowTime()
+    IEnumerator SlowTime(float slowAmount)
     {
-        enemyDamage.speedMultiplier = 0.4f;
+        enemyDamage.speedMultiplier = slowAmount;
         while (slowTicks > 0)
         {
             slowTicks--;
@@ -106,5 +133,26 @@ public class StatusEffects : MonoBehaviour
         }
         enemyDamage.speedMultiplier = 1f;
         isSlow = false;
+    }
+
+    IEnumerator LightingCooldown(int index)
+    {
+        while(enemyDamage.gameObject.transform.parent.GetComponentInChildren<EnemyChainCooldown>())
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+        if(index == 0)
+        {
+            yield return new WaitForSeconds(1f);
+        }
+        if(index == 1)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+        if(index == 2)
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+        isChainlight[index] = false;
     }
 }
