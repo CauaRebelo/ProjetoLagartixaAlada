@@ -137,10 +137,6 @@ public class StatusEffects : MonoBehaviour
 
     IEnumerator LightingCooldown(int index)
     {
-        while(enemyDamage.gameObject.transform.parent.GetComponentInChildren<EnemyChainCooldown>())
-        {
-            yield return new WaitForSeconds(0.1f);
-        }
         if(index == 0)
         {
             yield return new WaitForSeconds(1f);

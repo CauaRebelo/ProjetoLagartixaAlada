@@ -462,10 +462,34 @@ MonoBehaviour:
         m_CallState: 2
   <OnParry>k__BackingField:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5910354983738595368}
+        m_TargetAssemblyTypeName: AnimationController, Assembly-CSharp
+        m_MethodName: AnimatePlayerReflect
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   <OnRiposite>k__BackingField:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5910354983738595368}
+        m_TargetAssemblyTypeName: AnimationController, Assembly-CSharp
+        m_MethodName: AnimatePlayerRiposite
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   <OnAttack>k__BackingField:
     m_PersistentCalls:
       m_Calls:
@@ -607,12 +631,12 @@ MonoBehaviour:
   playerDamage: {fileID: 1659471982433229672}
   numOfHearts: 6
   hearts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2185230482750497396}
+  - {fileID: 2976447738675716838}
+  - {fileID: 7984529417589834257}
+  - {fileID: 5355306124769157279}
+  - {fileID: 6219214928702914177}
+  - {fileID: 1012599756615109130}
   fullHeart: {fileID: 2062906075, guid: de6df3b0ef154d243aee1cf665e1cd1a, type: 3}
   emptyHeart: {fileID: -1624687290, guid: de6df3b0ef154d243aee1cf665e1cd1a, type: 3}
 --- !u!1 &1478677450368274157

@@ -7,6 +7,9 @@ public class PlayerDamage : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     //[SerializeField] private HealthBar healthBar;
+
+    [field: SerializeField]
+    public UnityEvent<bool> OnDamage { get; set; }
     public Transform spawnPoint;
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private PlayerReflect playerReflect;
@@ -56,11 +59,13 @@ public class PlayerDamage : MonoBehaviour
     IEnumerator Immune()
     {
         iframe = true;
-        previousColor = sprite.color;
-        sprite.color = Color.red;
+        OnDamage?.Invoke(true);
+        Time.timeScale = 0.1f;
+        yield return new WaitForSecondsRealtime(0.3f);
+        Time.timeScale = 1f;
+        OnDamage?.Invoke(false);
         yield return new WaitForSeconds(immuneTime);
         iframe = false;
-        sprite.color = previousColor;
     }
 
     IEnumerator GameOver()

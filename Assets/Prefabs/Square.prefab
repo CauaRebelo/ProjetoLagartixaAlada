@@ -147,6 +147,8 @@ MonoBehaviour:
   debuff: 1
   effectVariable1: 5
   effectVariable2: 12
+  cooldown: 2
+  isReady: 0
 --- !u!114 &3481911521404985335
 MonoBehaviour:
   m_ObjectHideFlags: 0

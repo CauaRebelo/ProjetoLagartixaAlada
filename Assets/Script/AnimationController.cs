@@ -34,6 +34,21 @@ public class AnimationController : MonoBehaviour
         agentAnimator.SetBool("VerticalAttack", val);
     }
 
+    private void SetReflectAnimation(bool val)
+    {
+        agentAnimator.SetBool("Reflect", val);
+    }
+
+    private void SetRipositeAnimation(bool val)
+    {
+        agentAnimator.SetBool("Riposite", val);
+    }
+
+    private void SetDamagedAnimation(bool val)
+    {
+        agentAnimator.SetBool("Damaged", val);
+    }
+
     public void AnimatePlayerWalk(float velocity)
     {
         if (velocity > 0)
@@ -73,6 +88,21 @@ public class AnimationController : MonoBehaviour
     public void AnimatePlayerVerticalAttack(bool val)
     {
         SetVerticalAttackAnimation(val);
+    }
+
+    public void AnimatePlayerReflect(bool val)
+    {
+        SetReflectAnimation(val);
+    }
+
+    public void AnimatePlayerRiposite(bool val)
+    {
+        SetRipositeAnimation(val);
+    }
+
+    public void AnimatePlayerDamaged(bool val)
+    {
+        SetDamagedAnimation(val);
     }
 
 }

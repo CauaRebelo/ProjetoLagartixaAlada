@@ -37,6 +37,7 @@ public class PlayerReflect : MonoBehaviour
         playerDamage.parrying = false;
         playerDamage.iframe = true;
         yield return new WaitForSeconds(ripositeCooldown);
+        playerMovement.OnRiposite?.Invoke(false);
         playerMovement.canAttack = true;
         playerMovement.isAbleToAct = true;
         playerMovement.canMove = true;

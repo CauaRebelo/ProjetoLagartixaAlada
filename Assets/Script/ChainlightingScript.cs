@@ -33,20 +33,19 @@ public class ChainlightingScript : MonoBehaviour
         particles = GetComponent<ParticleSystem>();
         startOBject = gameObject;
         singleSpawns = 1;
-        Destroy(transform.parent.gameObject, 0.3f);
-        Destroy(gameObject, 0.3f);
+        Destroy(gameObject, 1f);
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
         
-        if(enemyLayer == (enemyLayer | (1 << col.gameObject.layer)) && !col.GetComponentInChildren<EnemyChainCooldown>())
+        if(col.gameObject.tag == "Enemy" && !col.GetComponentInChildren<EnemyChainCooldown>())
         {
             if(singleSpawns != 0)
             {
                 endObject = col.gameObject;
                 chainAmount -= 1;
-                Instantiate(chainLightingEffect, col.gameObject.transform.position, Quaternion.identity);
+                Instantiate(chainLightingEffect, col.gameObject.transform);
                 Instantiate(chainLightingCooldown, col.gameObject.transform);
                 col.gameObject.GetComponent<EnemyDamage>().Damage(3, damage, 0, 0, 0);
                 animator.StopPlayback();
@@ -60,8 +59,7 @@ public class ChainlightingScript : MonoBehaviour
                 particles.Emit(emitParms, 1);
                 emitParms.position = (startOBject.transform.position + endObject.transform.position) /2;
                 particles.Emit(emitParms, 1);
-                Destroy(transform.parent.gameObject, 0.3f);
-                Destroy(gameObject, 0.3f);
+                Destroy(gameObject, 1f);
             }
         }
 

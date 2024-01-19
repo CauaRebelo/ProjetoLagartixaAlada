@@ -388,17 +388,18 @@ public class PlayerMovement : MonoBehaviour
             playerDamage.iframe = false;
         }
         rb.velocity = Vector2.zero;
-        if(hitEnemy)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower / 2);
-            hitEnemy = false;
-        }
         OnAttack?.Invoke(false);
         OnLongAttack?.Invoke(false);
         normalAttack.SetActive(true);
         OnVerticalAttack?.Invoke(true);
         attackAnim.Play("VerticalSwingAir");
-        yield return new WaitForSeconds(verticalAttackAirCooldown);
+        yield return new WaitForSeconds(0.2f);
+        if(hitEnemy)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpingPower / 2);
+            hitEnemy = false;
+        }
+        yield return new WaitForSeconds(verticalAttackAirCooldown - 0.2f);
         rb.drag = 0;
         normalAttack.SetActive(false);
         OnVerticalAttack?.Invoke(false);
@@ -406,6 +407,19 @@ public class PlayerMovement : MonoBehaviour
         isAbleToAct = true;
         canMove = true;
         canAttack = true;
+    }
+
+    private void CheckforHittoJump()
+    {
+        while(spamVerticalAttack)
+        {
+            if(hitEnemy)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpingPower / 2);
+                hitEnemy = false;
+                return;
+            }
+        }
     }
 
     private IEnumerator Attack()
