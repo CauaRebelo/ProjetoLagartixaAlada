@@ -13,6 +13,7 @@ public class PlayerDamage : MonoBehaviour
     public Transform spawnPoint;
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private PlayerReflect playerReflect;
+    [SerializeField] private Canvas canvas;
 
     public bool parrying = false;
     public bool iframe = false;
@@ -24,6 +25,7 @@ public class PlayerDamage : MonoBehaviour
     void Start()
     {
         health = maxHealth;
+        EventSystem.current.onRespawn += OnRespawn;
         //healthBar.UpdateResourceBar(health, maxHealth);
     }
 
@@ -45,14 +47,30 @@ public class PlayerDamage : MonoBehaviour
 
         if(health <= 0)
         {
-            StartCoroutine(GameOver());
+            Death();
         }
     }
 
     public void FallDamage()
     {
-        health = 0;
         //healthBar.UpdateResourceBar(health, maxHealth);
+        Death();
+    }
+
+    public void Death()
+    {
+        canvas.gameObject.SetActive(true);
+        health = 0;
+        Time.timeScale = 1f;
+        OnDamage?.Invoke(false);
+        iframe = false;
+        EventSystem.current.Death();
+        player.SetActive(false);
+    }
+
+    public void OnRespawn()
+    {
+        player.SetActive(true);
         StartCoroutine(GameOver());
     }
 
@@ -74,7 +92,6 @@ public class PlayerDamage : MonoBehaviour
         //healthBar.UpdateResourceBar(health, maxHealth);
         player.transform.position = spawnPoint.position;
         //Time.timeScale = 0.1f;
-        EventSystem.current.Death();
         yield return new WaitForSecondsRealtime(2f);
         //Time.timeScale = 1f;
     }

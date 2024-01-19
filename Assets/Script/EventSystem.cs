@@ -30,4 +30,13 @@ public class EventSystem : MonoBehaviour
             onDeath();
         }
     }
+
+    public event Action onRespawn;
+    public void Respawn()
+    {
+        if (onRespawn != null)
+        {
+            onRespawn();
+        }
+    }
 }

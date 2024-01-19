@@ -7,29 +7,40 @@ public class DeathResponse : MonoBehaviour
 
     [SerializeField] private CanvasGroup myFade;
 
-    public void Start()
+    public void Awake()
     {
         EventSystem.current.onDeath += OnDeath;
+        EventSystem.current.onRespawn += OnRespawn;
     }
 
     private void OnDeath()
     {
-        StartCoroutine(Fade());
+        myFade.interactable = true;
+        StartCoroutine(FadeIn());
     }
 
-    IEnumerator Fade()
+    private void OnRespawn()
+    {
+        StartCoroutine(FadeOut());
+    }
+
+    IEnumerator FadeIn()
     {
         while(myFade.alpha < 1)
         {
             myFade.alpha += Time.deltaTime;
             yield return new WaitForSeconds(0.005f);
         }
-        yield return new WaitForSeconds(0.2f);
+    }
+
+    IEnumerator FadeOut()
+    {
         while (myFade.alpha > 0)
         {
             myFade.alpha -= Time.deltaTime;
             yield return new WaitForSeconds(0.005f);
         }
-    }
-            
+        myFade.interactable = false;
+        myFade.gameObject.SetActive(false);
+    }            
 }
