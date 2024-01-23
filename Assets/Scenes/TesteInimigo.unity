@@ -223,8 +223,20 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 956659885431991255, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1370004674}
     - target: {fileID: 1180974363610702330, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1485145241686633812, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2259786927477024926, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3228478660102503791, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
@@ -239,6 +251,22 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1370004674}
+    - target: {fileID: 5413278519637770205, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5448182069026978968, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1370004674}
+    - target: {fileID: 5876269851831544915, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5891409599902181463, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7841206396395101890, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.25
@@ -1405,6 +1433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d093a51bd9e84444b0374ba4e3b6951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pontosArvore: 0
 --- !u!4 &621885222
 Transform:
   m_ObjectHideFlags: 0
@@ -2605,6 +2634,7 @@ GameObject:
   - component: {fileID: 1370004674}
   - component: {fileID: 1370004673}
   - component: {fileID: 1370004676}
+  - component: {fileID: 1370004677}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2730,6 +2760,26 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &1370004677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370004672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e188ee899633d0b49870a5ae38b7359d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ratio: {x: 1920, y: 1080}
+  forceRatioOnAwake: 1
+  listenForWindowChanges: 1
+  createCameraForLetterBoxRendering: 1
+  findCamerasAutomatically: 1
+  letterBoxCameraColor: {r: 0, g: 0, b: 0, a: 1}
+  cameras: []
+  letterBoxCamera: {fileID: 0}
 --- !u!1 &1384425740
 GameObject:
   m_ObjectHideFlags: 0
