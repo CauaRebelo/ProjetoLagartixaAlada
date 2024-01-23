@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     private int maxEnchantment;
     public float damage= 1f;
 
-    //private TreeController treeController = TreeController.Instance;
+    private TreeController treeController;
     public bool[,] abilityTree = {{ false, false, false, false, false, false}, {false, false, false, false, false, false}, {false, false, false, false, false, false}, };
 
     public bool canMove = true;
@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator attackAnim;
 
     public TMP_Text textoArvore;
-    public int pontosArvore;
+    //public int pontosArvore;
     //textoArvore.SetText("Pontos: " + pontosArvore.ToString());
 
     public bool canDash = true;
@@ -89,9 +89,9 @@ public class PlayerMovement : MonoBehaviour
         //EventSystem.current.onPlayerDamage += OnPlayerDamage;
 
         maxEnchantment = 4;
-        pontosArvore = 1;
+        treeController = GameObject.Find("TreeManager").GetComponent<TreeController>();
         attackAnim = normalAttack.GetComponent<Animator>();
-        textoArvore.SetText("Pontos Disponiveis: " + pontosArvore.ToString());
+        textoArvore.SetText("Pontos Disponiveis: " + treeController.AcessarPontos().ToString());
     }
 
     // Update is called once per frame
@@ -226,31 +226,31 @@ public class PlayerMovement : MonoBehaviour
             case 0:
                 break;
             case 1:
-                if(abilityTree[0, 2])
+                if(treeController.AcessarArvore(0,2))
                 {
                     Instantiate(dashaoe_prefab_ice, transform.position + new Vector3(0 + 1 * transform.localScale.x, 0 , 0), Quaternion.identity);
-                    if (abilityTree[0, 3])
+                    if (treeController.AcessarArvore(0, 3))
                     {
                         //Dash de Gelo 3
                     }
                 }
                 break;
             case 2:
-                if (abilityTree[1, 2])
+                if (treeController.AcessarArvore(1, 2))
                 {
                     Instantiate(dashaoe_prefab_fire, transform.position + new Vector3(0 + 1 * transform.localScale.x, 0, 0), Quaternion.identity);
                     Debug.Log("Funcionou!");
-                    if (abilityTree[1, 3])
+                    if (treeController.AcessarArvore(1, 3))
                     {
                         //Dash de Fogo 3
                     }
                 }
                 break;
             case 3:
-                if (abilityTree[2, 2])
+                if (treeController.AcessarArvore(2, 2))
                 {
                     Instantiate(dashaoe_prefab_light, transform.position + new Vector3(0 + 1 * transform.localScale.x, 0, 0), Quaternion.identity);
-                    if (abilityTree[2, 3])
+                    if (treeController.AcessarArvore(2, 3))
                     {
                         //Dash de Raio 3
                     }
@@ -291,13 +291,13 @@ public class PlayerMovement : MonoBehaviour
             case 0:
                 break;
             case 1:
-                if(abilityTree[0, 4])
+                if(treeController.AcessarArvore(0, 4))
                 {
                     attackHitbox.AddComponent<StatusAttack>();
                     attackHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Slow;
                     attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 0.7f;
                     attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 5;
-                    if (abilityTree[0, 5])
+                    if (treeController.AcessarArvore(0, 5))
                     {
                         attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 0.6f;
                         attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 6;
@@ -305,27 +305,27 @@ public class PlayerMovement : MonoBehaviour
                 }
                 break;
             case 2:
-                if (abilityTree[1, 4])
+                if (treeController.AcessarArvore(1, 4))
                 {
                     attackHitbox.AddComponent<StatusAttack>();
                     attackHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Burning;
                     attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 4;
                     attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 5;
                     Debug.Log("Funcionou!");
-                    if (abilityTree[1, 5])
+                    if (treeController.AcessarArvore(1, 5))
                     {
                         attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 6;
                     }
                 }
                 break;
             case 3:
-                if (abilityTree[2, 4])
+                if (treeController.AcessarArvore(2, 4))
                 {
                     attackHitbox.AddComponent<StatusAttack>();
                     attackHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Chainlight;
                     attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 2;
                     attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 15;
-                    if (abilityTree[2, 5])
+                    if (treeController.AcessarArvore(2, 5))
                     {
                         attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 25;
                     }
@@ -369,40 +369,40 @@ public class PlayerMovement : MonoBehaviour
             case 0:
                 break;
             case 1:
-                if(abilityTree[0, 4])
+                if(treeController.AcessarArvore(0, 4))
                 {
                     attackHitbox.AddComponent<StatusAttack>();
                     attackHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Slow;
                     attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 0.75f;
                     attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 5;
-                    if (abilityTree[0, 5])
+                    if (treeController.AcessarArvore(0, 5))
                     {
                         attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 0.7f;
                     }
                 }
                 break;
             case 2:
-                if (abilityTree[1, 4])
+                if (treeController.AcessarArvore(1, 4))
                 {
                     attackHitbox.AddComponent<StatusAttack>();
                     attackHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Burning;
                     attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 3;
                     attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 4;
                     Debug.Log("Funcionou!");
-                    if (abilityTree[1, 5])
+                    if (treeController.AcessarArvore(1, 5))
                     {
                         attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 4;
                     }
                 }
                 break;
             case 3:
-                if (abilityTree[2, 4])
+                if (treeController.AcessarArvore(2, 4))
                 {
                     attackHitbox.AddComponent<StatusAttack>();
                     attackHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Chainlight;
                     attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 2;
                     attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 12;
-                    if (abilityTree[2, 5])
+                    if (treeController.AcessarArvore(2, 5))
                     {
                         attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 20;
                     }
@@ -441,40 +441,40 @@ public class PlayerMovement : MonoBehaviour
             case 0:
                 break;
             case 1:
-                if(abilityTree[0, 4])
+                if(treeController.AcessarArvore(0, 4))
                 {
                     attackHitbox.AddComponent<StatusAttack>();
                     attackHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Slow;
                     attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 0.80f;
                     attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 5;
-                    if (abilityTree[0, 5])
+                    if (treeController.AcessarArvore(0, 5))
                     {
                         attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 0.75f;
                     }
                 }
                 break;
             case 2:
-                if (abilityTree[1, 4])
+                if (treeController.AcessarArvore(1, 4))
                 {
                     attackHitbox.AddComponent<StatusAttack>();
                     attackHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Burning;
                     attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 2;
                     attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 4;
                     Debug.Log("Funcionou!");
-                    if (abilityTree[1, 5])
+                    if (treeController.AcessarArvore(1, 5))
                     {
                         attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 3;
                     }
                 }
                 break;
             case 3:
-                if (abilityTree[2, 4])
+                if (treeController.AcessarArvore(2, 4))
                 {
                     attackHitbox.AddComponent<StatusAttack>();
                     attackHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Chainlight;
                     attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 2;
                     attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 10;
-                    if (abilityTree[2, 5])
+                    if (treeController.AcessarArvore(2, 5))
                     {
                         attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 15;
                     }
@@ -532,40 +532,40 @@ public class PlayerMovement : MonoBehaviour
             case 0:
                 break;
             case 1:
-                if(abilityTree[0, 4])
+                if(treeController.AcessarArvore(0, 4))
                 {
                     attackHitbox.AddComponent<StatusAttack>();
                     attackHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Slow;
                     attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 0.8f;
                     attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 5;
-                    if (abilityTree[0, 5])
+                    if (treeController.AcessarArvore(0, 5))
                     {
                         attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 0.75f;
                     }
                 }
                 break;
             case 2:
-                if (abilityTree[1, 4])
+                if (treeController.AcessarArvore(1, 4))
                 {
                     attackHitbox.AddComponent<StatusAttack>();
                     attackHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Burning;
                     attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 2;
                     attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 4;
                     Debug.Log("Funcionou!");
-                    if (abilityTree[1, 5])
+                    if (treeController.AcessarArvore(1, 5))
                     {
                         attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 3;
                     }
                 }
                 break;
             case 3:
-                if (abilityTree[2, 4])
+                if (treeController.AcessarArvore(2, 4))
                 {
                     attackHitbox.AddComponent<StatusAttack>();
                     attackHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Chainlight;
                     attackHitbox.GetComponent<StatusAttack>().effectVariable1 = 2;
                     attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 10;
-                    if (abilityTree[2, 5])
+                    if (treeController.AcessarArvore(2, 5))
                     {
                         attackHitbox.GetComponent<StatusAttack>().effectVariable2 = 15;
                     }
@@ -600,20 +600,21 @@ public class PlayerMovement : MonoBehaviour
             playerDamage.iframe = false;
         }
         OnParry?.Invoke(true);
+        rb.velocity = Vector2.zero;
         yield return new WaitForSeconds(parryStart);
         switch (enchantment)
         {
             case 0:
                 break;
             case 1:
-                if (abilityTree[0, 0])
+                if (treeController.AcessarArvore(0, 0))
                 {
                     //Reflect de Gelo 1
                     ripositeHitbox.AddComponent<StatusAttack>();
                     ripositeHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Slow;
                     ripositeHitbox.GetComponent<StatusAttack>().effectVariable1 = 0.5f;
                     ripositeHitbox.GetComponent<StatusAttack>().effectVariable2 = 10;
-                    if (abilityTree[0, 1])
+                    if (treeController.AcessarArvore(0, 1))
                     {
                         ripositeHitbox.GetComponent<StatusAttack>().effectVariable1 = 0.3f;
                         ripositeHitbox.GetComponent<StatusAttack>().effectVariable2 = 12;
@@ -621,28 +622,28 @@ public class PlayerMovement : MonoBehaviour
                 }
                 break;
             case 2:
-                if (abilityTree[1, 0])
+                if (treeController.AcessarArvore(1, 0))
                 {
                     //Reflect de Fogo 1
                     ripositeHitbox.AddComponent<StatusAttack>();
                     ripositeHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Burning;
                     ripositeHitbox.GetComponent<StatusAttack>().effectVariable1 = 5;
                     ripositeHitbox.GetComponent<StatusAttack>().effectVariable2 = 10;
-                    if (abilityTree[1, 1])
+                    if (treeController.AcessarArvore(1, 1))
                     {
                         ripositeHitbox.GetComponent<StatusAttack>().effectVariable1 = 10;
                     }
                 }
                 break;
             case 3:
-                if (abilityTree[2, 0])
+                if (treeController.AcessarArvore(2, 0))
                 {
                     //Reflect de Raio 1
                     ripositeHitbox.AddComponent<StatusAttack>();
                     ripositeHitbox.GetComponent<StatusAttack>().debuff = StatusEffects.DebuffsType.Chainlight;
                     ripositeHitbox.GetComponent<StatusAttack>().effectVariable1 = 1;
                     ripositeHitbox.GetComponent<StatusAttack>().effectVariable2 = 20;
-                    if (abilityTree[2, 1])
+                    if (treeController.AcessarArvore(2, 1))
                     {
                         ripositeHitbox.GetComponent<StatusAttack>().effectVariable2 = 50;
                     }
@@ -662,25 +663,31 @@ public class PlayerMovement : MonoBehaviour
         canMove = true;
     }
 
+    public void Sitdown()
+    {
+        rb.velocity = Vector2.zero;
+        isAbleToAct = false;
+    }
+
     public void TreePoint(int amount)
     {
-        pontosArvore += amount;
-        textoArvore.SetText("Pontos Disponiveis: " + pontosArvore.ToString());
+        treeController.ModificarPontos(amount);
+        textoArvore.SetText("Pontos Disponiveis: " + treeController.AcessarPontos().ToString());
     }
 
     public bool checkTree(int aux1, int aux2)
     {
-        return abilityTree[aux1, aux2];
+        return treeController.AcessarArvore(aux1, aux2);
     }
 
     public void unlockSkill(int enchant)
     {
-        if(pontosArvore > 0)
+        if(treeController.AcessarPontos() > 0)
         {
-            abilityTree[enchant/10, enchant%10] = true;
+            treeController.ModificarArvore(enchant/10, enchant%10, true);
             Debug.Log(enchant%10);
-            pontosArvore -= 1;
-            textoArvore.SetText("Pontos Disponiveis: " + pontosArvore.ToString());
+            treeController.ModificarPontos(-1);
+            textoArvore.SetText("Pontos Disponiveis: " + treeController.AcessarPontos().ToString());
         }
     }
 }
