@@ -61,12 +61,12 @@ public class PlayerInteract : MonoBehaviour
             playerMovement.Sitdown();
             yield return new WaitForSeconds(1f);
         }
-        playerMovement.isAbleToAct = true;
-        playerDamage.iframe = false;
     }
 
     public void Leave()
     {
         sitting = false;
+        playerMovement.isAbleToAct = true;
+        playerDamage.iframe = false;
     }
 }

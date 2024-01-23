@@ -19,7 +19,7 @@ public class TreeController : MonoBehaviour
         }
         DontDestroyOnLoad (transform.gameObject);
         Instance = this;
-        pontosArvore = 1;
+        pontosArvore = 5;
     }
     
     public bool AcessarArvore(int indexA, int indexB)
