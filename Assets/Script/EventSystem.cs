@@ -39,4 +39,14 @@ public class EventSystem : MonoBehaviour
             onRespawn();
         }
     }
+
+    public event Action onSkillChange;
+
+    public void SkillChange()
+    {
+        if (onSkillChange != null)
+        {
+            onSkillChange();
+        }
+    }
 }

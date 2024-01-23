@@ -49,12 +49,15 @@ public class EnemyDamage : MonoBehaviour
         {
             enemy.SetActive(false);
         }
-        rb.velocity = new Vector2(resistences[0] * knockX, resistences[0] * knockY);
+        if(knockX >  0 || knockY > 0)
+        {
+            rb.velocity = new Vector2(resistences[0] * knockX, resistences[0] * knockY);
+        }
     }
 
     public void OnDeath()
     {
-        enemy.transform.position = spawnPoint.position ;
+        enemy.transform.GetChild(0).transform.position = spawnPoint.position ;
         health = maxHealth;
         rb.gravityScale = gravity;
         healthBar.UpdateResourceBar(health, maxHealth);
