@@ -25,7 +25,8 @@ public class DialogoNpc : MonoBehaviour
     void Update(){
         if (Input.GetKeyDown(KeyCode.F) && readyToSpeak){
             if(!startDialogue){
-                FindObjectOfType<PlayerMovement>().canMove = false;
+                FindObjectOfType<PlayerMovement>().isDialogueActive = true;
+                
                 StartDialogue();
             }
             else if(dialogueText.text == dialogueNpc[dialogueIndex]){
@@ -44,7 +45,8 @@ public class DialogoNpc : MonoBehaviour
             dialoguePanel.SetActive(false);
             startDialogue = false;
             dialogueIndex = 0;
-            FindObjectOfType<PlayerMovement>().canMove = true;
+            FindObjectOfType<PlayerMovement>().isDialogueActive = false;
+            
         }
     }
 

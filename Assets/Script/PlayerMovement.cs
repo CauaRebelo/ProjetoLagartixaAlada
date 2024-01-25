@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     //private TreeController treeController = TreeController.Instance;
     public bool[,] abilityTree = {{ false, false, false, false, false, false}, {false, false, false, false, false, false}, {false, false, false, false, false, false}, };
 
+    public bool isDialogueActive;
+
     public bool canMove = true;
     private float horizontal;
     private float speed = 8f;
@@ -97,6 +99,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!isDialogueActive){
         if (!isAbleToAct)
         {
             return;
@@ -158,6 +161,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         Flip(false);
+        }
     }
 
     private void FixedUpdate()
