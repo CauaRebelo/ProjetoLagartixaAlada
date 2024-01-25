@@ -7,6 +7,7 @@ public class PlayerInteract : MonoBehaviour
     private bool interactableTouch;
     private bool dialogue;
     private bool spawnPoint;
+    private bool sitting = false;
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private GameObject canvas;
     [SerializeField] private PlayerDamage playerDamage;
@@ -14,9 +15,12 @@ public class PlayerInteract : MonoBehaviour
     {
         if (Input.GetAxisRaw("Vertical") < 0 && interactableTouch == true)
         {
-            playerMovement.isAbleToAct = false;
             playerDamage.iframe = true;
             playerDamage.health = playerDamage.maxHealth;
+            playerMovement.Sitdown();
+            sitting = true;
+            EventSystem.current.Death();
+            StartCoroutine(Sit());
             canvas.gameObject.SetActive(true);
             if(spawnPoint)
             {
@@ -48,8 +52,20 @@ public class PlayerInteract : MonoBehaviour
         interactableTouch = false;
     }
 
+    private IEnumerator Sit()
+    {
+        while(sitting == true)
+        {
+            playerDamage.iframe = true;
+            playerDamage.health = playerDamage.maxHealth;
+            playerMovement.Sitdown();
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
     public void Leave()
     {
+        sitting = false;
         playerMovement.isAbleToAct = true;
         playerDamage.iframe = false;
     }
