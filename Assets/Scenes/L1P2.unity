@@ -3883,8 +3883,8 @@ Canvas:
   m_GameObject: {fileID: 948737441}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 45414279}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -5028,13 +5028,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 956659885431991255, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 45414279}
     - target: {fileID: 1659471982433229672, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 564411268}
+    - target: {fileID: 2944877352763711651, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.8096361
+      objectReference: {fileID: 0}
     - target: {fileID: 3228478660102503791, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
       propertyPath: m_Name
       value: MainPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 4140539781220870998, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 45414279}
+    - target: {fileID: 5448182069026978968, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 45414279}
+    - target: {fileID: 5698242691431092359, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7841206396395101890, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5100,8 +5120,13 @@ PrefabInstance:
       propertyPath: hearts.Array.data[5]
       value: 
       objectReference: {fileID: 2109340927}
+    - target: {fileID: 8808732354720060394, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 45414279}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7801091518227827817, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7841206396395101890, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
       insertIndex: -1

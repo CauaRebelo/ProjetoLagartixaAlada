@@ -114,6 +114,7 @@ public class BasicEnemyBehaviour : MonoBehaviour
     void OnDeath()
     {
         StopAllCoroutines();
+        OnAttack.Invoke(false);
         isAttacking = false;
     }
 

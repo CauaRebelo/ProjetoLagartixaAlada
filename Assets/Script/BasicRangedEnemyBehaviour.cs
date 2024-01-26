@@ -56,6 +56,7 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour
             }
             if (!isAttacking)
             {
+                rb.velocity = Vector2.zero;
                 //if (isChasing)
                 //{
                 //    if (Vector2.Distance(transform.position, playerTransform.position) >= chaseDistance)
@@ -146,6 +147,7 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour
     public void OnDeath()
     {
         StopAllCoroutines();
+        OnAttack.Invoke(false);
         attack.SetActive(false);
         isAttacking = false;
     }

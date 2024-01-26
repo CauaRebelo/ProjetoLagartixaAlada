@@ -22,4 +22,15 @@ public class ChangeScene : MonoBehaviour
     {
         SceneManager.LoadScene("TesteInimigosRawr");
     }
+
+    public void loadSceneComeco()
+    {
+        SceneManager.LoadScene("L1P1");
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+    
 }

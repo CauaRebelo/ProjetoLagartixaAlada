@@ -74,6 +74,7 @@ public class EnemyDamage : MonoBehaviour
     public void OnDeath()
     {
         OnDead.Invoke(false);
+        OnDamaged.Invoke(false);
         enemy.transform.GetChild(0).transform.position = spawnPoint.position ;
         health = maxHealth;
         rb.gravityScale = gravity;
