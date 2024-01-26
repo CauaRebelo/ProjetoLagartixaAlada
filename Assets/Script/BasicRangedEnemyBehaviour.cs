@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
 
 public class BasicRangedEnemyBehaviour : MonoBehaviour
 {
@@ -22,55 +24,70 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour
     public float attackDowntime = 2f;
     public bool isChasing = false;
     public bool isAttacking = false;
+    public bool isAbletoAct = true;
+    public int type; //0 Neutral, 1 Ice, 2 Fire, 3 Thunder
     private float gravity;
+    [field: SerializeField]
+    public UnityEvent<bool> OnAttack { get; set; }
+    [field: SerializeField]
+    public UnityEvent<int> OnType { get; set; }
 
     public void Start()
     {
         EventSystem.current.onDeath += OnDeath;
         playerTransform = GameObject.FindWithTag("Player").transform;
+        OnType.Invoke(type);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (enemyDamage.broken)
+        if(isAbletoAct)
         {
-            rb.gravityScale = 1f;
-            return;
-        }
-        if (!isAttacking)
-        {
-            //if (isChasing)
-            //{
-            //    if (Vector2.Distance(transform.position, playerTransform.position) >= chaseDistance)
-            //    {
-            //        isChasing = false;
-            //    }
-            //    Chase();
-            //}
-            //else
-            //{
-                //if (Vector2.Distance(transform.position, playerTransform.position) < chaseDistance)
-                //{
-                //    isChasing = true;
-                //}
-                //MoveToNextPoint();
-            if (Vector2.Distance(transform.position, playerTransform.position) <= attackDistance)
-             {
-                if (rb.transform.position.x > playerTransform.position.x)
-                {
-                    rb.transform.localScale = new Vector3(1, 1, 1);
-                }
-                if (rb.transform.position.x < playerTransform.position.x)
-                {
-                    rb.transform.localScale = new Vector3(-1, 1, 1);
-                }
-                isAttacking = true;
-                StartCoroutine(DoAttack());
-             }
-            else
+            if (enemyDamage.broken)
             {
-                MoveToNextPoint();
+                rb.gravityScale = 1f;
+                if(isAttacking)
+                {
+                    isAttacking = false;
+                    OnAttack.Invoke(false);
+                }
+                return;
+            }
+            if (!isAttacking)
+            {
+                //if (isChasing)
+                //{
+                //    if (Vector2.Distance(transform.position, playerTransform.position) >= chaseDistance)
+                //    {
+                //        isChasing = false;
+                //    }
+                //    Chase();
+                //}
+                //else
+                //{
+                    //if (Vector2.Distance(transform.position, playerTransform.position) < chaseDistance)
+                    //{
+                    //    isChasing = true;
+                    //}
+                    //MoveToNextPoint();
+                if (Vector2.Distance(transform.position, playerTransform.position) <= attackDistance)
+                {
+                    if (rb.transform.position.x > playerTransform.position.x)
+                    {
+                        rb.transform.localScale = new Vector3(1, 1, 1);
+                    }
+                    if (rb.transform.position.x < playerTransform.position.x)
+                    {
+                        rb.transform.localScale = new Vector3(-1, 1, 1);
+                    }
+                    isAttacking = true;
+                    StartCoroutine(DoAttack());
+                }
+                else
+                {
+                    MoveToNextPoint();
+                }
             }
         }
     }
@@ -117,9 +134,11 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour
 
     IEnumerator DoAttack()
     {
+        OnAttack.Invoke(true);
         attack.SetActive(true);
         attack.GetComponent<BulletSpawner>().firingRate = attackSpeed;
         yield return new WaitForSeconds(attackDowntime);
+        OnAttack.Invoke(false);
         attack.SetActive(false);
         isAttacking = false;
     }

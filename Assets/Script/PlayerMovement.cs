@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject playerHitbox;
     [SerializeField] private GameObject ripositeHitbox;
     [SerializeField] private TrailRenderer trail;
-    [SerializeField] private SpriteRenderer sprite;
+    public SpriteRenderer sprite;
     [SerializeField] private PlayerDamage playerDamage;
 
     public GameObject dashaoe_prefab_fire;

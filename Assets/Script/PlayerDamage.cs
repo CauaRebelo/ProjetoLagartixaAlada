@@ -10,6 +10,8 @@ public class PlayerDamage : MonoBehaviour
 
     [field: SerializeField]
     public UnityEvent<bool> OnDamage { get; set; }
+    [field: SerializeField]
+    public UnityEvent<bool> OnDead { get; set; }
     public Transform spawnPoint;
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private PlayerReflect playerReflect;
@@ -60,9 +62,21 @@ public class PlayerDamage : MonoBehaviour
 
     public void Death()
     {
+        iframe = true;
+        playerMovement.isAbleToAct = false;
+        this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0f;
+        OnDamage?.Invoke(false);
+        OnDead?.Invoke(true);
+    }
+
+    public void RemovedDeath()
+    {
+        playerMovement.sprite.color *= new Color (1f, 1f, 1f, 0f);
+        playerMovement.sprite.color += new Color (0, 0, 0, 1f);
+        OnDead.Invoke(false);
         canvas.gameObject.SetActive(true);
-        health = 0;
-        Time.timeScale = 1f;
+        iframe = false;
+        EventSystem.current.Death();
         playerMovement.canAttack = true;
         playerMovement.canMove = true;
         playerMovement.isAbleToAct = true;
@@ -70,11 +84,10 @@ public class PlayerDamage : MonoBehaviour
         playerMovement.spamAttack = false;
         playerMovement.spamLongAttack = false;
         playerMovement.spamVerticalAttack = false;
-        OnDamage?.Invoke(false);
-        iframe = false;
-        EventSystem.current.Death();
+        this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 5f;
         player.SetActive(false);
     }
+
 
     public void OnRespawn()
     {
@@ -85,15 +98,36 @@ public class PlayerDamage : MonoBehaviour
     IEnumerator Immune()
     {
         iframe = true;
+        playerMovement.OnParry?.Invoke(false);
+        playerMovement.OnAttack?.Invoke(false);
+        playerMovement.OnLongAttack?.Invoke(false);
+        playerMovement.OnVerticalAttack?.Invoke(false);
         OnDamage?.Invoke(true);
         playerMovement.isAbleToAct = false;
-        Time.timeScale = 0.1f;
-        yield return new WaitForSecondsRealtime(0.3f);
-        Time.timeScale = 1f;
+        this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        float originalGravity = this.gameObject.GetComponent<Rigidbody2D>().gravityScale;
+        this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0f;
+        yield return new WaitForSeconds(0.3f);
+        this.gameObject.GetComponent<Rigidbody2D>().gravityScale = originalGravity;
         playerMovement.isAbleToAct = true;
         OnDamage?.Invoke(false);
+        StartCoroutine(Flicker());
         yield return new WaitForSeconds(immuneTime);
         iframe = false;
+    }
+
+    IEnumerator Flicker()
+    {
+        playerMovement.sprite.color *= new Color (1f, 1f, 1f, 0f);
+        playerMovement.sprite.color += new Color (0, 0, 0, 1f);
+        playerMovement.sprite.color -= new Color (0, 0, 0, 0.6f);
+        yield return new WaitForSeconds(immuneTime / 4);
+        playerMovement.sprite.color += new Color (0, 0, 0, 0.3f);
+        yield return new WaitForSeconds(immuneTime / 4);
+        playerMovement.sprite.color -= new Color (0, 0, 0, 0.3f);
+        yield return new WaitForSeconds(immuneTime / 4);
+        playerMovement.sprite.color += new Color (0, 0, 0, 0.6f);
+        yield return new WaitForSeconds(immuneTime / 4);
     }
 
     IEnumerator GameOver()

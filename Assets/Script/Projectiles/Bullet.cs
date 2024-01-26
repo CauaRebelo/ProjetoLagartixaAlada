@@ -22,7 +22,10 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerTransform = GameObject.FindWithTag("Player").transform;
+        if(GameObject.FindWithTag("Player") != null)
+        {
+            playerTransform = GameObject.FindWithTag("Player").transform;
+        }
         spawnPoint = new Vector2(transform.position.x, transform.position.y);
         float angle = Mathf.Atan2(playerTransform.position.y - transform.position.y, playerTransform.position.x - transform.position.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);

@@ -35,6 +35,7 @@ public class StatusEffects : MonoBehaviour
     {
         isBurning = false;
         isSlow = false;
+        EventSystem.current.onDeath += OnDeath;
     }
 
     // Update is called once per frame
@@ -163,5 +164,15 @@ public class StatusEffects : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         isChainlight[index] = false;
+    }
+
+    public void OnDeath()
+    {
+        StopAllCoroutines();
+        isBurning = false;
+        isSlow = false;
+        isChainlight[0] = false;
+        isChainlight[1] = false;
+        isChainlight[2] = false;
     }
 }

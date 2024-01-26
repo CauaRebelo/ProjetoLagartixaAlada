@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3422578397453801715, guid: 8997efbee67474e4cb1055f16f886fcc, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: be0561a42ad095e468a145cbe896e416, type: 3}
     - target: {fileID: 3598905986297311334, guid: 8997efbee67474e4cb1055f16f886fcc, type: 3}
       propertyPath: m_Color.b
       value: 0.7490196
@@ -91,6 +95,10 @@ PrefabInstance:
     - target: {fileID: 8017612040842468435, guid: 8997efbee67474e4cb1055f16f886fcc, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9152648286196927735, guid: 8997efbee67474e4cb1055f16f886fcc, type: 3}
+      propertyPath: type
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9152648286196927735, guid: 8997efbee67474e4cb1055f16f886fcc, type: 3}
       propertyPath: attackSpeed

@@ -24,7 +24,7 @@ public class BulletSpawner : MonoBehaviour
 
 
     private GameObject spawnedBullet;
-    private float timer = 0f;
+    //private float timer = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,15 +38,15 @@ public class BulletSpawner : MonoBehaviour
         //float angle = Mathf.Atan2(playerTransform.position.y - transform.position.y, playerTransform.position.x - transform.position.x) * Mathf.Rad2Deg;
         //Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
         //transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 100000f * Time.deltaTime);
-        timer += Time.deltaTime;
-        if (spawnerType == SpawnerType.Spin) transform.eulerAngles = new Vector3(0f, 0f, transform.eulerAngles.z + 1f);
-        if (timer >= firingRate)
-        {
-            Fire();
-            timer = 0;
-        }
+        //timer += Time.deltaTime;
+        //if (spawnerType == SpawnerType.Spin) transform.eulerAngles = new Vector3(0f, 0f, transform.eulerAngles.z + 1f);
+        //if (timer >= firingRate)
+        //{
+            //Fire();
+            //timer = 0;
+        //}
     }
-    private void Fire()
+    public void Fire()
     {
         if (bullet)
         {

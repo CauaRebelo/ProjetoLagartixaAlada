@@ -49,6 +49,11 @@ public class AnimationController : MonoBehaviour
         agentAnimator.SetBool("Damaged", val);
     }
 
+    private void SetDeadAnimation(bool val)
+    {
+        agentAnimator.SetBool("Dead", val);
+    }
+
     public void AnimatePlayerWalk(float velocity)
     {
         if (velocity > 0)
@@ -103,6 +108,11 @@ public class AnimationController : MonoBehaviour
     public void AnimatePlayerDamaged(bool val)
     {
         SetDamagedAnimation(val);
+    }
+
+    public void AnimatePlayerDead(bool val)
+    {
+        SetDeadAnimation(val);
     }
 
 }

@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BasicEnemyBehaviour : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform playerTransform;
     [SerializeField] private GameObject enemy;
-    [SerializeField] private GameObject attack;
     [SerializeField] private EnemyDamage enemyDamage;
 
     public List<Transform> waypoints;
@@ -20,35 +20,45 @@ public class BasicEnemyBehaviour : MonoBehaviour
     public float attackDistance = 2f;
     public float attackSpeed = 1f;
     public float attackDowntime = 2f;
+    public int type; //0 Neutral, 1 Ice, 2 Fire, 3 Thunder
     public bool isChasing = false;
     public bool isAttacking = false;
+    public bool isAbletoAct = true;
+    [field: SerializeField]
+    public UnityEvent<bool> OnAttack { get; set; }
+    [field: SerializeField]
+    public UnityEvent<int> OnType { get; set; }
 
     public void Start()
     {
         EventSystem.current.onDeath += OnDeath;
         playerTransform = GameObject.FindWithTag("Player").transform;
+        OnType.Invoke(type);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!isAttacking)
+        if(isAbletoAct)
         {
-            if (isChasing)
+            if(!isAttacking)
             {
-                if (Vector2.Distance(transform.position, playerTransform.position) >= chaseDistance)
+                if (isChasing)
                 {
-                    isChasing = false;
+                    if (Vector2.Distance(transform.position, playerTransform.position) >= chaseDistance)
+                    {
+                        isChasing = false;
+                    }
+                    Chase();
                 }
-                Chase();
-            }
-            else
-            {
-                if (Vector2.Distance(transform.position, playerTransform.position) < chaseDistance)
+                else
                 {
-                    isChasing = true;
+                    if (Vector2.Distance(transform.position, playerTransform.position) < chaseDistance)
+                    {
+                        isChasing = true;
+                    }
+                    MoveToNextPoint();
                 }
-                MoveToNextPoint();
             }
         }
     }
@@ -95,17 +105,15 @@ public class BasicEnemyBehaviour : MonoBehaviour
 
     IEnumerator DoAttack()
     {
-        attack.SetActive(true);
-        attack.GetComponent<Animator>().SetFloat("attackSpeed", attackSpeed);
+        OnAttack.Invoke(true);
         yield return new WaitForSeconds(attackDowntime);
-        attack.SetActive(false);
+        OnAttack.Invoke(false);
         isAttacking = false;
     }
 
     void OnDeath()
     {
         StopAllCoroutines();
-        attack.SetActive(false);
         isAttacking = false;
     }
 

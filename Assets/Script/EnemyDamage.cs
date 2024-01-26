@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyDamage : MonoBehaviour
 {
@@ -20,6 +21,10 @@ public class EnemyDamage : MonoBehaviour
     public float[] resistences = new float[4] { 0.1f, 0.2f, 0.2f, 1.5f };
     public float[] originalresistences;
     public float[] brokenresistenes = new float[4] { 1f, 1f, 1f, 2f };
+    [field: SerializeField]
+    public UnityEvent<bool> OnDamaged { get; set; }
+    [field: SerializeField]
+    public UnityEvent<bool> OnDead { get; set; }
 
     void Start()
     {
@@ -39,15 +44,14 @@ public class EnemyDamage : MonoBehaviour
         healthBar.UpdateResourceBar(health, maxHealth);
         tolerance -= resistences[enchatment] * tolerancedamage;
         toleranceBar.UpdateResourceBar(tolerance, maxTolerance);
-
-        if (tolerance <= 0)
-        {
-            broken = true;
-            resistences = brokenresistenes;
-        }
         if (health <= 0)
         {
-            enemy.SetActive(false);
+            OnDead.Invoke(true);
+        }
+        else if (tolerance <= 0)
+        {
+            resistences = brokenresistenes;
+            OnDamaged.Invoke(true);
         }
         if(knockX >  0 || knockY > 0)
         {
@@ -55,11 +59,25 @@ public class EnemyDamage : MonoBehaviour
         }
     }
 
+    public void RemovedDamaged()
+    {
+        OnDamaged.Invoke(false);
+        broken = true;
+    }
+
+    public void RemovedDeath()
+    {
+        OnDead.Invoke(false);
+        enemy.SetActive(false);
+    }
+
     public void OnDeath()
     {
+        OnDead.Invoke(false);
         enemy.transform.GetChild(0).transform.position = spawnPoint.position ;
         health = maxHealth;
         rb.gravityScale = gravity;
+        healthBar.gameObject.SetActive(true);
         healthBar.UpdateResourceBar(health, maxHealth);
         broken = false;
         tolerance = maxTolerance;

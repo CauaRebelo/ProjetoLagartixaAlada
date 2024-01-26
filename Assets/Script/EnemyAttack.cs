@@ -20,7 +20,10 @@ public class EnemyAttack : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
-            col.gameObject.transform.parent.gameObject.GetComponent<PlayerDamage>().Damage();
+            if(col.gameObject.transform.parent.gameObject.GetComponent<PlayerDamage>() != null)
+            {
+                col.gameObject.transform.parent.gameObject.GetComponent<PlayerDamage>().Damage();
+            }
         }
     }
 }

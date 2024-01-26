@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5220776141614338758, guid: 0f72d12f073c03d4e8b664a7af33a5d2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d02e67c0d5c01244e9582e5732ee11ad, type: 3}
     - target: {fileID: 5427396457403717125, guid: 0f72d12f073c03d4e8b664a7af33a5d2, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -83,6 +87,10 @@ PrefabInstance:
     - target: {fileID: 7366913561842954305, guid: 0f72d12f073c03d4e8b664a7af33a5d2, type: 3}
       propertyPath: brokenresistenes.Array.data[3]
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8181496507599946441, guid: 0f72d12f073c03d4e8b664a7af33a5d2, type: 3}
+      propertyPath: type
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8233123488448064153, guid: 0f72d12f073c03d4e8b664a7af33a5d2, type: 3}
       propertyPath: m_Color.b
