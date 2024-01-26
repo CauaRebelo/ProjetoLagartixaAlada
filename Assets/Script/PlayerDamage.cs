@@ -57,7 +57,7 @@ public class PlayerDamage : MonoBehaviour
     public void FallDamage()
     {
         //healthBar.UpdateResourceBar(health, maxHealth);
-        Death();
+        RemovedDeath();
     }
 
     public void Death()
@@ -73,7 +73,9 @@ public class PlayerDamage : MonoBehaviour
     {
         playerMovement.sprite.color *= new Color (1f, 1f, 1f, 0f);
         playerMovement.sprite.color += new Color (0, 0, 0, 1f);
+        OnDamage?.Invoke(false);
         OnDead.Invoke(false);
+        parrying = false;
         canvas.gameObject.SetActive(true);
         iframe = false;
         EventSystem.current.Death();

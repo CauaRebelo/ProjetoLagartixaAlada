@@ -668,7 +668,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 6069147197030147970}
-  spawnPoint: {fileID: 0}
+  spawnPoint: {fileID: 2889252977915198913}
   healthBar: {fileID: 7568525979317534016}
   toleranceBar: {fileID: 7174121816076566198}
   rb: {fileID: 3616538824326472283}

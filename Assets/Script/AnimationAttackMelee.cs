@@ -16,7 +16,10 @@ public class AnimationAttackMelee : MonoBehaviour
 
     public void AttackEnd()
     {
-        attack.GetComponent<Animator>().Play("MeleeIdle");
+        if(attack.gameObject.activeSelf)
+        {
+            attack.GetComponent<Animator>().Play("MeleeIdle");
+        }
         attack.gameObject.SetActive(false);
     }
 
