@@ -23,7 +23,7 @@ public class DialogoNpc : MonoBehaviour
     }
 
     void Update(){
-        if (Input.GetKeyDown(KeyCode.F) && readyToSpeak){
+        if ((Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return)) && readyToSpeak){
             if(!startDialogue){
                 FindObjectOfType<PlayerMovement>().isDialogueActive = true;
                 
