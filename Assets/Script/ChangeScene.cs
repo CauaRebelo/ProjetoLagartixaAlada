@@ -28,6 +28,11 @@ public class ChangeScene : MonoBehaviour
         SceneManager.LoadScene("L1P1");
     }
 
+    public void loadSceneMenuPrincipal()
+    {
+        SceneManager.LoadScene("MenuPrincipal");
+    }
+
     public void Quit()
     {
         Application.Quit();
