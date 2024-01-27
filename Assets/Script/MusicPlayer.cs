@@ -13,7 +13,14 @@ public class MusicPlayer : MonoBehaviour
 
     void Awake()
     {
-        src = GameObject.FindGameObjectWithTag("Music").GetComponent<MusicClass>()._audioSource;
+        if(GameObject.FindGameObjectWithTag("Music") != null)
+        {
+            src = GameObject.FindGameObjectWithTag("Music").GetComponent<MusicClass>()._audioSource;
+        }
+        else
+        {
+            return;
+        }
         if (precisaGuardar) 
         {
             storeTime = src.time;
