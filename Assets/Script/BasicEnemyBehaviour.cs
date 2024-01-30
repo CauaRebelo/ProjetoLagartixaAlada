@@ -18,7 +18,6 @@ public class BasicEnemyBehaviour : MonoBehaviour
     private float movementSpeed = 3f;
     public float chaseDistance = 7f;
     public float attackDistance = 2f;
-    public float attackSpeed = 1f;
     public float attackDowntime = 2f;
     public int type; //0 Neutral, 1 Ice, 2 Fire, 3 Thunder
     public bool isChasing = false;
@@ -26,6 +25,8 @@ public class BasicEnemyBehaviour : MonoBehaviour
     public bool isAbletoAct = true;
     [field: SerializeField]
     public UnityEvent<bool> OnAttack { get; set; }
+    [field: SerializeField]
+    public UnityEvent<float> AttackSpeed { get; set; }
     [field: SerializeField]
     public UnityEvent<int> OnType { get; set; }
 
@@ -43,6 +44,10 @@ public class BasicEnemyBehaviour : MonoBehaviour
         {
             if(!isAttacking)
             {
+                if(enemyDamage.speedMultiplier == 1)
+                {
+                    AttackSpeed.Invoke(enemyDamage.speedMultiplier);
+                }
                 if (isChasing)
                 {
                     if (Vector2.Distance(transform.position, playerTransform.position) >= chaseDistance)
@@ -105,8 +110,9 @@ public class BasicEnemyBehaviour : MonoBehaviour
 
     IEnumerator DoAttack()
     {
+        AttackSpeed.Invoke(enemyDamage.speedMultiplier);
         OnAttack.Invoke(true);
-        yield return new WaitForSeconds(attackDowntime);
+        yield return new WaitForSeconds(attackDowntime/ enemyDamage.speedMultiplier);
         OnAttack.Invoke(false);
         isAttacking = false;
     }

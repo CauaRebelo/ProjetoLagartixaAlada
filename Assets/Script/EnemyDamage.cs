@@ -11,7 +11,10 @@ public class EnemyDamage : MonoBehaviour
     [SerializeField] private ResourceBar toleranceBar;
     [SerializeField] private Rigidbody2D rb;
 
+    public GameObject soul;
+
     public float speedMultiplier = 1f;
+    public bool firsTime;
     public float health;
     public float maxHealth = 60f;
     public float tolerance;
@@ -28,6 +31,7 @@ public class EnemyDamage : MonoBehaviour
 
     void Start()
     {
+        firsTime = true;
         EventSystem.current.onDeath += OnDeath;
         originalresistences = resistences;
         gravity = rb.gravityScale;
@@ -67,6 +71,11 @@ public class EnemyDamage : MonoBehaviour
 
     public void RemovedDeath()
     {
+        if(firsTime)
+        {
+            firsTime = false;
+            Instantiate(soul, transform.position, Quaternion.identity);
+        }
         OnDead.Invoke(false);
         enemy.SetActive(false);
     }

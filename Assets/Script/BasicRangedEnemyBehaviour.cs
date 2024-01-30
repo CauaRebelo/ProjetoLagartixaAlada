@@ -30,6 +30,8 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour
     [field: SerializeField]
     public UnityEvent<bool> OnAttack { get; set; }
     [field: SerializeField]
+    public UnityEvent<float> AttackSpeed { get; set; }
+    [field: SerializeField]
     public UnityEvent<int> OnType { get; set; }
 
     public void Start()
@@ -83,6 +85,7 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour
                         rb.transform.localScale = new Vector3(-1, 1, 1);
                     }
                     isAttacking = true;
+                    AttackSpeed.Invoke(enemyDamage.speedMultiplier);
                     StartCoroutine(DoAttack());
                 }
                 else
@@ -135,10 +138,11 @@ public class BasicRangedEnemyBehaviour : MonoBehaviour
 
     IEnumerator DoAttack()
     {
+        AttackSpeed.Invoke(enemyDamage.speedMultiplier);
         OnAttack.Invoke(true);
         attack.SetActive(true);
         attack.GetComponent<BulletSpawner>().firingRate = attackSpeed;
-        yield return new WaitForSeconds(attackDowntime);
+        yield return new WaitForSeconds(attackDowntime/enemyDamage.speedMultiplier);
         OnAttack.Invoke(false);
         attack.SetActive(false);
         isAttacking = false;

@@ -93,7 +93,7 @@ public class StatusEffects : MonoBehaviour
             {
                 slowTicks = ticks;
             }
-            if(currentSlowAmount < slowAmount)
+            if(currentSlowAmount > slowAmount)
             {
                 currentSlowAmount = slowAmount;
             }

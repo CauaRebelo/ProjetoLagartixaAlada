@@ -11,6 +11,11 @@ public class EnemyAnimationController : MonoBehaviour
         agentAnimator.SetBool("Attack", val);
     }
 
+    private void SetAttackSpeed(float val)
+    {
+        agentAnimator.SetFloat("attackSpeed", val);
+    }
+
     private void SetDamagedAnimation(bool val)
     {
         agentAnimator.SetBool("Damaged", val);
@@ -29,6 +34,11 @@ public class EnemyAnimationController : MonoBehaviour
     public void AnimateAttack(bool val)
     {
         SetAttackAnimation(val);
+    }
+
+    public void AttackSpeed(float val)
+    {
+        SetAttackSpeed(val);
     }
 
     public void AnimateDamaged(bool val)

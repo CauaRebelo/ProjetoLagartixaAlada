@@ -107,11 +107,13 @@ public class PlayerDamage : MonoBehaviour
         OnDamage?.Invoke(true);
         playerMovement.isAbleToAct = false;
         this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        float originalGravity = this.gameObject.GetComponent<Rigidbody2D>().gravityScale;
+        float originalGravity = 5f;
         this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0f;
         yield return new WaitForSeconds(0.3f);
         this.gameObject.GetComponent<Rigidbody2D>().gravityScale = originalGravity;
         playerMovement.isAbleToAct = true;
+        playerMovement.canMove = true;
+        playerMovement.canDash = true;
         OnDamage?.Invoke(false);
         StartCoroutine(Flicker());
         yield return new WaitForSeconds(immuneTime);

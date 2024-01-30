@@ -288,6 +288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attack: {fileID: 9199982340462356777}
   enemyDamage: {fileID: 5985653351472874470}
+  attackAnimator: {fileID: 1755220292530917581}
 --- !u!1 &2703913287489645825
 GameObject:
   m_ObjectHideFlags: 0
@@ -619,7 +620,6 @@ MonoBehaviour:
   nextPoints: 0
   chaseDistance: 5
   attackDistance: 2
-  attackSpeed: 1.5
   attackDowntime: 3
   type: 0
   isChasing: 0
@@ -631,6 +631,21 @@ MonoBehaviour:
       - m_Target: {fileID: 8303213745033328794}
         m_TargetAssemblyTypeName: EnemyAnimationController, Assembly-CSharp
         m_MethodName: AnimateAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  <AttackSpeed>k__BackingField:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8303213745033328794}
+        m_TargetAssemblyTypeName: EnemyAnimationController, Assembly-CSharp
+        m_MethodName: AttackSpeed
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -672,7 +687,9 @@ MonoBehaviour:
   healthBar: {fileID: 7568525979317534016}
   toleranceBar: {fileID: 7174121816076566198}
   rb: {fileID: 3616538824326472283}
+  soul: {fileID: 6093379547376569332, guid: 5be1500dd7d7f8d4b834ff5a9752d922, type: 3}
   speedMultiplier: 1
+  firsTime: 0
   health: 160
   maxHealth: 160
   tolerance: 0

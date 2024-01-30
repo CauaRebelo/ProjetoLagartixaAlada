@@ -19,6 +19,10 @@ public class StatusAttack : MonoBehaviour
         isReady = true;
     }
 
+    private void OnEnable()
+    {
+        isReady = true;
+    }
     // Update is called once per frame
     void OnTriggerStay2D(Collider2D col)
     {

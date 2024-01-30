@@ -6,11 +6,13 @@ public class AnimationAttackMelee : MonoBehaviour
 {
     [SerializeField] private GameObject attack;
     [SerializeField] private EnemyDamage enemyDamage;
+    [SerializeField] private Animator attackAnimator;
 
 
     public void Attack()
     {
         attack.gameObject.SetActive(true);
+        attackAnimator.SetFloat("attackSpeed", enemyDamage.speedMultiplier);
         attack.GetComponent<Animator>().Play("SwingBasic");
     }
 
