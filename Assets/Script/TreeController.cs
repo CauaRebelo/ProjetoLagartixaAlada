@@ -9,6 +9,7 @@ public class TreeController : MonoBehaviour
     public bool[,] abilityTree = {{ false, false, false, false, false, false}, {false, false, false, false, false, false}, {false, false, false, false, false, false}, };
 
     public int pontosArvore;
+    public float pontosEspirito;
 
     void Awake () 
     {
@@ -19,7 +20,7 @@ public class TreeController : MonoBehaviour
         }
         DontDestroyOnLoad (transform.gameObject);
         Instance = this;
-        pontosArvore = 5;
+        pontosArvore = 1;
     }
     
     public bool AcessarArvore(int indexA, int indexB)
@@ -38,5 +39,14 @@ public class TreeController : MonoBehaviour
     public void ModificarPontos(int value)
     {
         pontosArvore += value;
+    }
+
+    public float AcessarPontosEspiritos()
+    {
+        return pontosEspirito;
+    }
+    public void ModificarPontosEspiritos(float value)
+    {
+        pontosEspirito += value;
     }
 }

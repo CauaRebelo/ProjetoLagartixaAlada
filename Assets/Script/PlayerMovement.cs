@@ -30,13 +30,12 @@ public class PlayerMovement : MonoBehaviour
 
     private TreeController treeController;
     public bool[,] abilityTree = {{ false, false, false, false, false, false}, {false, false, false, false, false, false}, {false, false, false, false, false, false}, };
-    private float soulPoints = 0f;
 
     public bool isDialogueActive;
 
     public bool canMove = true;
     private float horizontal;
-    private float speed = 8f;
+    public float speed = 8f;
     private float jumpingPower = 20f;
     public bool isFacingRight = true;
 
@@ -93,6 +92,7 @@ public class PlayerMovement : MonoBehaviour
         maxEnchantment = 4;
         treeController = GameObject.Find("TreeManager").GetComponent<TreeController>();
         attackAnim = normalAttack.GetComponent<Animator>();
+        mudarSouls(0);
         textoArvore.SetText("Pontos Disponiveis: " + treeController.AcessarPontos().ToString());
     }
 
@@ -673,16 +673,16 @@ public class PlayerMovement : MonoBehaviour
 
     public void mudarSouls(float amount)
     {
-        soulPoints += amount;
-        while(soulPoints >= 1)
+        treeController.ModificarPontosEspiritos(amount);
+        while(treeController.AcessarPontosEspiritos() >= 1)
         {
-            soulPoints -= 1;
+            treeController.ModificarPontosEspiritos(-1);
             TreePoint(1);
         }
-        if(soulPoints > 0)
+        if(treeController.AcessarPontosEspiritos() > 0)
         {
             slider.gameObject.SetActive(true);
-            slider.value = soulPoints;
+            slider.value = treeController.AcessarPontosEspiritos();
         }
         else
         {

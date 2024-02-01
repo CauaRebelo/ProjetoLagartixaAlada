@@ -137,10 +137,7 @@ public class PlayerDamage : MonoBehaviour
     IEnumerator GameOver()
     {
         health = maxHealth;
-        //healthBar.UpdateResourceBar(health, maxHealth);
         player.transform.position = spawnPoint.position;
-        //Time.timeScale = 0.1f;
         yield return new WaitForSecondsRealtime(2f);
-        //Time.timeScale = 1f;
     }
 }
