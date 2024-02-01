@@ -37,6 +37,10 @@ public class PlayerMovement : MonoBehaviour
     private float horizontal;
     public float speed = 8f;
     private float jumpingPower = 20f;
+    private float coyoteJumpTime = 0.2f;
+    private float coyoteJumpTimeCounter;
+    private float jumpBufferTime = 0.2f;
+    private float jumpBufferTimeCounter;
     public bool isFacingRight = true;
 
     private Coroutine attackCo;
@@ -106,8 +110,36 @@ public class PlayerMovement : MonoBehaviour
         }
 
         OnGroundedChange?.Invoke(isGrounded());
+        if(isGrounded())
+        {
+            coyoteJumpTimeCounter = coyoteJumpTime;
+        }
+        else
+        {
+            coyoteJumpTimeCounter -= Time.deltaTime;
+        }
+
+        if(Input.GetButtonDown("Jump"))
+        {
+            jumpBufferTimeCounter = jumpBufferTime;
+        }
+        else
+        {
+            jumpBufferTimeCounter -= Time.deltaTime;
+        }
 
         horizontal = Input.GetAxisRaw("Horizontal");
+
+        if(coyoteJumpTimeCounter > 0f && jumpBufferTimeCounter > 0f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            if (canAttack == false)
+            {
+                normalAttack.SetActive(false);
+                canAttack = true;
+            }
+            jumpBufferTimeCounter = 0f;
+        }
 
         if(Input.GetButtonDown("Jump") && isGrounded())
         {
@@ -122,6 +154,7 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            coyoteJumpTimeCounter = 0f;
         }
 
         if (Input.GetButton("Vertical") && Input.GetButtonDown("Fire2") && canAttack)

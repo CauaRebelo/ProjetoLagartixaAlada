@@ -31,6 +31,10 @@ public class ChangeScene : MonoBehaviour
     public void loadSceneMenuPrincipal()
     {
         SceneManager.LoadScene("MenuPrincipal");
+        if(GameObject.Find("TreeManager")!=null)
+        {
+            Destroy(GameObject.Find("TreeManager"));
+        }
     }
 
     public void Quit()
