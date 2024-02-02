@@ -56,7 +56,7 @@ public class InstaDialogoNpc : MonoBehaviour
         dialogueText.text = "";
         foreach(char letter in dialogueNpc[dialogueIndex]){
             dialogueText.text += letter;
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.01f);
         }
     }
 
