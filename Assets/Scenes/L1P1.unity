@@ -6467,6 +6467,8 @@ MonoBehaviour:
   dialogueNpc:
   - Esse guarda parece ser diferente.
   - Tome cuidado!
+  - "Esse inimigo \xE9 resistente aos seus ataques."
+  - "Mas se voc\xEA quebrar sua barreira ele ficar\xE1 vulner\xE1vel!"
   dialogueIndex: 0
   dialoguePanel: {fileID: 1510053340}
   dialogueText: {fileID: 979047049}
@@ -6507,7 +6509,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 70.90927, y: 5.6795373}
+  m_Offset: {x: 69.306816, y: 5.6795373}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -6518,7 +6520,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.4758911, y: 12.359075}
+  m_Size: {x: 1.1488495, y: 12.359075}
   m_EdgeRadius: 0
 --- !u!4 &978820249
 Transform:
