@@ -18,6 +18,9 @@ public class EnemyDamage : MonoBehaviour
     public float health;
     public float maxHealth = 60f;
     public float tolerance;
+    public bool multipleTolerance = false;
+    public int toleranceStage;
+    public bool immune = false;
     public float maxTolerance = 20f;
     private float gravity;
     public bool broken;
@@ -44,10 +47,50 @@ public class EnemyDamage : MonoBehaviour
 
     public void Damage(int enchatment, float damage, float tolerancedamage, float knockX, float knockY)
     {
-        health -= resistences[enchatment] * damage;
-        healthBar.UpdateResourceBar(health, maxHealth);
-        tolerance -= resistences[enchatment] * tolerancedamage;
-        toleranceBar.UpdateResourceBar(tolerance, maxTolerance);
+        if(!immune)
+        {
+            health -= resistences[enchatment] * damage;
+            healthBar.UpdateResourceBar(health, maxHealth);
+            if(multipleTolerance && health <= (maxHealth * 50)/100)
+            {
+                immune = true;
+                broken = false;
+                resistences = originalresistences;
+                tolerance = maxTolerance;
+                toleranceStage = 3;
+            }
+        }
+        if(!multipleTolerance)
+        {
+            tolerance -= resistences[enchatment] * tolerancedamage;
+            toleranceBar.UpdateResourceBar(tolerance, maxTolerance);
+        }
+        else
+        {
+            tolerance -= resistences[enchatment] * tolerancedamage;
+            toleranceBar.UpdateResourceBar(tolerance, maxTolerance);
+            switch(toleranceStage)
+            {
+                case 3:
+                    if (tolerance <= (maxTolerance * 66) / 100)
+                    {
+                        float oldResistence = resistences[2];
+                        resistences[2] = resistences[1];
+                        resistences[1] = oldResistence;
+                        toleranceStage--;
+                    }
+                    break;
+                case 2:
+                    if(tolerance <= (maxTolerance * 33)/100)
+                    {
+                        float oldResistence = resistences[3];
+                        resistences[3] = resistences[2];
+                        resistences[2] = oldResistence;
+                        toleranceStage--;
+                    }
+                    break;
+            }
+        }
         if (health <= 0)
         {
             OnDead.Invoke(true);
@@ -55,6 +98,7 @@ public class EnemyDamage : MonoBehaviour
         else if (tolerance <= 0)
         {
             resistences = brokenresistenes;
+            immune = false;
             OnDamaged.Invoke(true);
         }
         if(knockX >  0 || knockY > 0)

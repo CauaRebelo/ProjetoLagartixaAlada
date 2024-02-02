@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Interactable
   - Music
+  - BulletHell
+  - GlobalLight
   layers:
   - Default
   - TransparentFX
