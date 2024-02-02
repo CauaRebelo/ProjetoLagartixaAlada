@@ -218,12 +218,12 @@ TextureImporter:
       name: Fire Mage anim_5
       rect:
         serializedVersion: 2
-        x: 2042
+        x: 2035
         y: 3532
         width: 964
         height: 776
       alignment: 9
-      pivot: {x: 0.28012326, y: 0.52232254}
+      pivot: {x: 0.280123, y: 0.5274073}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
