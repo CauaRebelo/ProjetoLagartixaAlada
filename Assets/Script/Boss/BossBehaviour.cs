@@ -8,7 +8,7 @@ public class BossBehaviour : MonoBehaviour
 {
     [SerializeField] private FireBulletHellInArc bulletArc1;
     [SerializeField] private FireBulletHellInArc bulletArc2;
-    private GameObject playerHitbox;
+    public GameObject playerHitbox;
     private Light2D globalLight;
     public List<Vector2> positionList = new List<Vector2>();
     public float actionInterval;
@@ -26,11 +26,15 @@ public class BossBehaviour : MonoBehaviour
     void Start()
     {
         noAttack = true;
-        playerHitbox = GameObject.FindWithTag("BulletHell");
+        //playerHitbox = GameObject.FindWithTag("BulletHell");
         globalLight = GameObject.FindWithTag("GlobalLight").GetComponent<Light2D>();
         StartCoroutine(DoAction());
     }
 
+    public void Broken()
+    {
+
+    }
     IEnumerator DoAction()
     {
         noAttack = true;

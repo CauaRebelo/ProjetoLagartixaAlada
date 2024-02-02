@@ -731,6 +731,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletArc1: {fileID: 294259659}
   bulletArc2: {fileID: 1455838371}
+  playerHitbox: {fileID: 1816170603}
   positionList:
   - {x: 12.0336, y: 3.37}
   actionInterval: 0
@@ -808,6 +809,7 @@ MonoBehaviour:
   multipleTolerance: 1
   toleranceStage: 3
   immune: 1
+  firstImmune: 1
   maxTolerance: 1000
   broken: 0
   resistences:
@@ -3057,6 +3059,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7386806317612944227, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7841206396395101890, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.5
@@ -3127,7 +3133,7 @@ PrefabInstance:
       objectReference: {fileID: 150643349}
     - target: {fileID: 9034125296713216134, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 343467497980581016, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
@@ -4074,6 +4080,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1816170603 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9034125296713216134, guid: 643406967a9e77d4ea86a0901d5cf41b, type: 3}
+  m_PrefabInstance: {fileID: 1438433824}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1838133607
 GameObject:
   m_ObjectHideFlags: 0
@@ -4168,6 +4179,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1955362494}
   - component: {fileID: 1955362495}
+  - component: {fileID: 1955362496}
   m_Layer: 0
   m_Name: BossArena
   m_TagString: Untagged
@@ -4214,6 +4226,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1955362496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955362493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6ed6e2a541844b4cbf83e51393bcd7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyDamage: {fileID: 294259663}
 --- !u!1 &1980875639
 GameObject:
   m_ObjectHideFlags: 0

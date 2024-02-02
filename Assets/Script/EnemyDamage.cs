@@ -21,6 +21,7 @@ public class EnemyDamage : MonoBehaviour
     public bool multipleTolerance = false;
     public int toleranceStage;
     public bool immune = false;
+    public bool firstImmune = false;
     public float maxTolerance = 20f;
     private float gravity;
     public bool broken;
@@ -34,9 +35,9 @@ public class EnemyDamage : MonoBehaviour
 
     void Start()
     {
+        originalresistences = resistences;
         firsTime = true;
         EventSystem.current.onDeath += OnDeath;
-        originalresistences = resistences;
         gravity = rb.gravityScale;
         broken = false;
         health = maxHealth;
@@ -51,12 +52,13 @@ public class EnemyDamage : MonoBehaviour
         {
             health -= resistences[enchatment] * damage;
             healthBar.UpdateResourceBar(health, maxHealth);
-            if(multipleTolerance && health <= (maxHealth * 50)/100)
+            if(multipleTolerance && health <= (maxHealth * 50)/100 && firstImmune)
             {
+                tolerance = maxTolerance;
+                resistences = originalresistences;
                 immune = true;
                 broken = false;
-                resistences = originalresistences;
-                tolerance = maxTolerance;
+                firstImmune = false;
                 toleranceStage = 3;
             }
         }
@@ -131,11 +133,18 @@ public class EnemyDamage : MonoBehaviour
         enemy.transform.GetChild(0).transform.position = spawnPoint.position ;
         health = maxHealth;
         rb.gravityScale = gravity;
+        if(multipleTolerance)
+        {
+            firstImmune = true;
+            immune = true;
+            toleranceStage = 3;
+        }
         healthBar.gameObject.SetActive(true);
         healthBar.UpdateResourceBar(health, maxHealth);
         broken = false;
         tolerance = maxTolerance;
         resistences = originalresistences;
+        Debug.Log("Dying");
         toleranceBar.UpdateResourceBar(tolerance, maxTolerance);
         enemy.SetActive(true);
     }
