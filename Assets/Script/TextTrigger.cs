@@ -17,6 +17,7 @@ public class InstaDialogoNpc : MonoBehaviour
 
     public bool readyToSpeak;
     public bool startDialogue;
+    public bool firstTime = true; // Adicionado
 
     void Start(){
         dialoguePanel.SetActive(false);
@@ -56,12 +57,13 @@ public class InstaDialogoNpc : MonoBehaviour
         dialogueText.text = "";
         foreach(char letter in dialogueNpc[dialogueIndex]){
             dialogueText.text += letter;
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.01f);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision){
-        if(collision.CompareTag("Player") && !startDialogue){
+        if(collision.CompareTag("Player") && !startDialogue && (firstTime || Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return))){
+            firstTime = false;
             FindObjectOfType<PlayerMovement>().isDialogueActive = true;
             FindObjectOfType<PlayerMovement>().speed = 0f;
             StartDialogue();

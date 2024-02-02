@@ -88,6 +88,8 @@ public class PlayerMovement : MonoBehaviour
 
     [field: SerializeField]
     public UnityEvent<bool> OnVerticalAttack { get; set; }
+    [field: SerializeField]
+    public UnityEvent<int> OnChangeEnchantment { get; set; }
 
     public void Start()
     {
@@ -244,6 +246,7 @@ public class PlayerMovement : MonoBehaviour
                 sprite.color = new Color(0.5438939f, 0.7490196f, 0.5252461f);
                 break;
         }
+        OnChangeEnchantment?.Invoke(enchantment - 1);
     }
 
     private IEnumerator Dash()
