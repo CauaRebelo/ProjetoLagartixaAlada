@@ -48,6 +48,16 @@ public class WallChangeScene : MonoBehaviour
         SceneManager.LoadScene("L1P7");
     }
 
+    public void loadSceneFase8()
+    {
+        SceneManager.LoadScene("L2P1");
+    }
+
+    public void loadSceneFase9()
+    {
+        SceneManager.LoadScene("L3Boss");
+    }
+
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == "Player")
@@ -75,6 +85,14 @@ public class WallChangeScene : MonoBehaviour
             if(index == 6)
             {
                 loadSceneFase7(); 
+            }
+            if (index == 7)
+            {
+                loadSceneFase8();
+            }
+            if (index == 8)
+            {
+                loadSceneFase9();
             }
         }
     }

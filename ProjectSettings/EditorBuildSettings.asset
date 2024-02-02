@@ -50,4 +50,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Nivel1 testes.unity
     guid: 43a51790a1c7f8a42aecfec5296b0a2f
+  - enabled: 1
+    path: Assets/Scenes/L2P1.unity
+    guid: c93ea0e35b42b3f4a86976fd1b5742b6
   m_configObjects: {}
