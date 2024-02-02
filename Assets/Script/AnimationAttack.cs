@@ -16,7 +16,7 @@ public class AnimationAttack : MonoBehaviour
     public void Damaged()
     {
         this.gameObject.GetComponent<Animator>().SetBool("Attack", false);
-        enemyDamage.RemovedDamaged();
+        enemyDamage.broken = true;
     }
     
     public void Death()
