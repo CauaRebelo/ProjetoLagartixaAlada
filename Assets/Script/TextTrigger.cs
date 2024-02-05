@@ -24,8 +24,14 @@ public class InstaDialogoNpc : MonoBehaviour
     }
 
     void Update(){
-        if ((Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return)) && startDialogue && dialogueText.text == dialogueNpc[dialogueIndex]){
-            NextDialogue();
+        if ((Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return)) && startDialogue){
+            if(dialogueText.text != dialogueNpc[dialogueIndex]){
+                StopAllCoroutines();
+                dialogueText.text = dialogueNpc[dialogueIndex];
+            }
+            else {
+                NextDialogue();
+            }
         }
     }
 
@@ -45,7 +51,7 @@ public class InstaDialogoNpc : MonoBehaviour
 }
 
     void StartDialogue(){
-        nameNpc.text = "NPC";
+        nameNpc.text = "Voz Distante";
         imageNpc.sprite = spriteNpc;
         startDialogue = true;
         dialogueIndex = 0;
