@@ -2757,7 +2757,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 2
-  m_Text: Venha e me encontre, guerreiro
+  m_Text: 
 --- !u!222 &406751958
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6584,6 +6584,7 @@ MonoBehaviour:
   spriteNpc: {fileID: 21300000, guid: 4238380c3280dde40b31bf6dd50dc676, type: 3}
   readyToSpeak: 0
   startDialogue: 0
+  firstTime: 1
 --- !u!61 &978820248
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9124,7 +9125,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueNpc:
-  - Venha e me encontre, guerreiro.
+  - "Venha e me encontre, guerreiro.                                                                                        
+    Aperte E para pular o di\xE1logo."
   dialogueIndex: 0
   dialoguePanel: {fileID: 647615498}
   dialogueText: {fileID: 406751957}
@@ -9133,6 +9135,7 @@ MonoBehaviour:
   spriteNpc: {fileID: 21300000, guid: 4238380c3280dde40b31bf6dd50dc676, type: 3}
   readyToSpeak: 0
   startDialogue: 0
+  firstTime: 1
 --- !u!1 &1402071482
 GameObject:
   m_ObjectHideFlags: 0
