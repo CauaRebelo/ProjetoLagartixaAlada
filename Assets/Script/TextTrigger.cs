@@ -17,7 +17,7 @@ public class InstaDialogoNpc : MonoBehaviour
 
     public bool readyToSpeak;
     public bool startDialogue;
-    public bool firstTime = true; // Adicionado
+    public bool firstTime = true;
 
     void Start(){
         dialoguePanel.SetActive(false);
@@ -51,7 +51,7 @@ public class InstaDialogoNpc : MonoBehaviour
 }
 
     void StartDialogue(){
-        nameNpc.text = "Voz Distante";
+        nameNpc.text = "Dragão Ancião";
         imageNpc.sprite = spriteNpc;
         startDialogue = true;
         dialogueIndex = 0;
