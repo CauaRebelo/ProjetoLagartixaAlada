@@ -1346,7 +1346,7 @@ MonoBehaviour:
   playerDamage: {fileID: 1659471982433229672}
   dashaoe_prefab_fire: {fileID: 4996721710955868970, guid: b51690805b84e144495a861e2c7c22d6, type: 3}
   dashaoe_prefab_ice: {fileID: 4690900500000390778, guid: 34982f2718cd57845ba22b036b4e2a8c, type: 3}
-  dashaoe_prefab_light: {fileID: 6727475827436707189, guid: b0096c1d76decce43aa705d99a9af536, type: 3}
+  dashaoe_prefab_light: {fileID: 4690900500000390778, guid: 64e6cecc57747f549815ee7ba76bdeea, type: 3}
   enchantment: 0
   damage: 1
   isDialogueActive: 0
@@ -20681,11 +20681,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 334758494298131618, guid: e8bfe071dcafcaf4ba087a69124076a4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.3983765
+      value: 1.8096361
       objectReference: {fileID: 0}
     - target: {fileID: 334758494298131618, guid: e8bfe071dcafcaf4ba087a69124076a4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.7351193
+      value: 4.8351192
       objectReference: {fileID: 0}
     - target: {fileID: 334758494298131618, guid: e8bfe071dcafcaf4ba087a69124076a4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -20733,11 +20733,11 @@ PrefabInstance:
       objectReference: {fileID: 2952290358158393123}
     - target: {fileID: 7165010144551173254, guid: e8bfe071dcafcaf4ba087a69124076a4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.619328
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7165010144551173254, guid: e8bfe071dcafcaf4ba087a69124076a4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.16604383
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7165010144551173254, guid: e8bfe071dcafcaf4ba087a69124076a4, type: 3}
       propertyPath: m_LocalPosition.z
