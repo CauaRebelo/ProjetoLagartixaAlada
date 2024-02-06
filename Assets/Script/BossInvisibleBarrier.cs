@@ -13,6 +13,9 @@ public class BossInvisibleBarrier : MonoBehaviour
     [SerializeField] private GameObject oldCamera;
     [SerializeField] private GameObject boss;
     [SerializeField] private GameObject princess;
+    [SerializeField] private GameObject normalSong;
+    [SerializeField] private GameObject bossSong;
+    [SerializeField] private GameObject victorySong;
     private bool used = false;
     private bool bossDead = false;
     private bool firstTime = false;
@@ -56,6 +59,10 @@ public class BossInvisibleBarrier : MonoBehaviour
         oldCamera.SetActive(true);
         dialogueFirst.SetActive(false);
         dialogueAfter.SetActive(false);
+        bossSong.SetActive(false);
+        victorySong.SetActive(false);
+        normalSong.SetActive(true);
+        normalSong.GetComponent<MusicPlayer>().Play();
         dialogueAfter.GetComponent<InstaDialogoNpc>().firstTime = true;
         princess.SetActive(true);
     }
@@ -68,6 +75,10 @@ public class BossInvisibleBarrier : MonoBehaviour
         }
         else
         {
+            bossSong.SetActive(true);
+            normalSong.SetActive(false);
+            victorySong.SetActive(false);
+            bossSong.GetComponent<MusicPlayer>().Play();
             princess.SetActive(false);
             dialogueFirst.SetActive(false);
             dialogueAfter.SetActive(false);
@@ -77,6 +88,10 @@ public class BossInvisibleBarrier : MonoBehaviour
     
     void OnBossDeath()
     {
+        bossSong.SetActive(false);
+        normalSong.SetActive(false);
+        victorySong.SetActive(true);
+        victorySong.GetComponent<MusicPlayer>().Play();
         princess.SetActive(false);
         dialogueFirst.SetActive(false);
         dialogueAfter.SetActive(true);
