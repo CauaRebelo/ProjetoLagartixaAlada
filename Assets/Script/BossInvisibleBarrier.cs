@@ -45,6 +45,9 @@ public class BossInvisibleBarrier : MonoBehaviour
             }
             else
             {
+                normalSong.SetActive(false);
+                victorySong.SetActive(false);
+                bossSong.GetComponent<MusicPlayer>().Play();
                 boss.SetActive(true);
                 princess.SetActive(false);
             }
