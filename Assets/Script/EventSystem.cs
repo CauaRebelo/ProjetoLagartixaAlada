@@ -22,6 +22,33 @@ public class EventSystem : MonoBehaviour
         }
     }
 
+    public event Action onPlayerElementeChange;
+    public void PlayerElementeChange()
+    {
+        if (onPlayerElementeChange != null)
+        {
+            onPlayerElementeChange();
+        }
+    }
+
+    public event Action onBossElementeChange;
+    public void BossElementeChange()
+    {
+        if (onBossElementeChange != null)
+        {
+            onBossElementeChange();
+        }
+    }
+
+    public event Action onBossDeath;
+    public void BossDeath()
+    {
+        if (onBossDeath != null)
+        {
+            onBossDeath();
+        }
+    }
+
     public event Action onDeath;
     public void Death()
     {

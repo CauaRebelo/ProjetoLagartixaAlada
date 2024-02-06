@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,12 +16,15 @@ public class EnemyDamage : MonoBehaviour
 
     public float speedMultiplier = 1f;
     public bool firsTime;
+    public bool falseDeath;
     public float health;
     public float maxHealth = 60f;
     public float tolerance;
     public bool multipleTolerance = false;
+    public bool anger = false;
     public int toleranceStage;
     public bool immune = false;
+    public bool trueImmune = false;
     public bool firstImmune = false;
     public float maxTolerance = 20f;
     private float gravity;
@@ -32,12 +36,16 @@ public class EnemyDamage : MonoBehaviour
     public UnityEvent<bool> OnDamaged { get; set; }
     [field: SerializeField]
     public UnityEvent<bool> OnDead { get; set; }
+    [field: SerializeField]
+    public UnityEvent<int> OnChangeEnchantment { get; set; }
 
     void Start()
     {
         originalresistences = resistences;
         firsTime = true;
+        falseDeath = true;
         EventSystem.current.onDeath += OnDeath;
+        EventSystem.current.onPlayerElementeChange += OnPlayerElementeChange;
         gravity = rb.gravityScale;
         broken = false;
         health = maxHealth;
@@ -48,18 +56,38 @@ public class EnemyDamage : MonoBehaviour
 
     public void Damage(int enchatment, float damage, float tolerancedamage, float knockX, float knockY)
     {
+        if(trueImmune)
+        {
+            return;
+        }
         if(!immune)
         {
             health -= resistences[enchatment] * damage;
             healthBar.UpdateResourceBar(health, maxHealth);
             if(multipleTolerance && health <= (maxHealth * 50)/100 && firstImmune)
             {
+                ChangeElement(3);
+                health = (maxHealth * 50) / 100;
+                healthBar.UpdateResourceBar(health, maxHealth);
                 tolerance = maxTolerance;
-                resistences = originalresistences;
+                toleranceBar.UpdateResourceBar(health, maxHealth);
                 immune = true;
                 broken = false;
                 firstImmune = false;
                 toleranceStage = 3;
+                OnDamaged.Invoke(false);
+            }
+            if(multipleTolerance && health <= 0 && falseDeath)
+            {
+                StartCoroutine(FakeDeath());
+                return;
+            }
+            else if(multipleTolerance && health <= 0 && !falseDeath)
+            {
+                trueImmune = true;
+                OnDamaged.Invoke(false);
+                OnDead.Invoke(true);
+                return;
             }
         }
         if(!multipleTolerance)
@@ -69,6 +97,10 @@ public class EnemyDamage : MonoBehaviour
         }
         else
         {
+            if(tolerancedamage == 0)
+            {
+                tolerancedamage += damage;
+            }
             tolerance -= resistences[enchatment] * tolerancedamage;
             toleranceBar.UpdateResourceBar(tolerance, maxTolerance);
             switch(toleranceStage)
@@ -76,18 +108,18 @@ public class EnemyDamage : MonoBehaviour
                 case 3:
                     if (tolerance <= (maxTolerance * 66) / 100)
                     {
-                        float oldResistence = resistences[2];
-                        resistences[2] = resistences[1];
-                        resistences[1] = oldResistence;
+                        tolerance = (maxTolerance * 66)/100;
+                        toleranceBar.UpdateResourceBar(tolerance, maxTolerance);
+                        ChangeElement(2);
                         toleranceStage--;
                     }
                     break;
                 case 2:
                     if(tolerance <= (maxTolerance * 33)/100)
                     {
-                        float oldResistence = resistences[3];
-                        resistences[3] = resistences[2];
-                        resistences[2] = oldResistence;
+                        tolerance = (maxTolerance * 33)/100;
+                        toleranceBar.UpdateResourceBar(tolerance, maxTolerance);
+                        ChangeElement(1);
                         toleranceStage--;
                     }
                     break;
@@ -130,14 +162,21 @@ public class EnemyDamage : MonoBehaviour
     {
         OnDead.Invoke(false);
         OnDamaged.Invoke(false);
-        enemy.transform.GetChild(0).transform.position = spawnPoint.position ;
+        if(!multipleTolerance)
+        {
+            enemy.transform.GetChild(0).transform.position = spawnPoint.position;
+        }
         health = maxHealth;
         rb.gravityScale = gravity;
         if(multipleTolerance)
         {
             firstImmune = true;
+            trueImmune = false;
             immune = true;
+            falseDeath = true;
+            ChangeElement(3);
             toleranceStage = 3;
+            this.gameObject.transform.parent.gameObject.SetActive(false);
         }
         healthBar.gameObject.SetActive(true);
         healthBar.UpdateResourceBar(health, maxHealth);
@@ -147,5 +186,66 @@ public class EnemyDamage : MonoBehaviour
         Debug.Log("Dying");
         toleranceBar.UpdateResourceBar(tolerance, maxTolerance);
         enemy.SetActive(true);
+    }
+
+    public void ChangeElement(int val)
+    {
+        switch(val)
+        {
+            case 1:
+                resistences[0] = 0f;
+                resistences[2] = 2f;
+                resistences[1] = 0.2f;
+                resistences[3] = 0.2f;
+                break;
+            case 2:
+                resistences[0] = 0f;
+                resistences[2] = 0.2f;
+                resistences[1] = 0.2f;
+                resistences[3] = 2f;
+                break;
+            case 3:
+                resistences[0] = 0f;
+                resistences[2] = 0.2f;
+                resistences[1] = 2f;
+                resistences[3] = 0.2f;
+                break;
+        }
+        OnChangeEnchantment?.Invoke(val - 1);
+        EventSystem.current.BossElementeChange();
+    }
+
+    public void OnPlayerElementeChange()
+    {
+        if(multipleTolerance && anger)
+        {
+            int element = GameObject.Find("/MainPlayer/Player").GetComponent<PlayerMovement>().enchantment;
+        }
+    }
+
+    IEnumerator FakeDeath()
+    {
+        trueImmune = true;
+        OnDead.Invoke(true);
+        OnDamaged.Invoke(false);
+        health = 0;
+        for(int i = 0; health <= (maxHealth/2); i++)
+        {
+            health += maxHealth / 5;
+            healthBar.UpdateResourceBar(health, maxHealth);
+            yield return new WaitForSeconds(0.1f);
+        }
+        trueImmune = false;
+        OnDead.Invoke(false);
+        ChangeElement(3);
+        health = (maxHealth * 50) / 100;
+        healthBar.UpdateResourceBar(health, maxHealth);
+        tolerance = maxTolerance;
+        toleranceBar.UpdateResourceBar(tolerance, maxTolerance);
+        immune = true;
+        broken = false;
+        firstImmune = false;
+        toleranceStage = 3;
+        falseDeath = false;
     }
 }

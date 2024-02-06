@@ -12,10 +12,6 @@ public class NewBulletHell : MonoBehaviour
     {
         Invoke("Destroy", lifeTime);   
     }
-    void Start()
-    {
-        moveSpeed = 5f;
-    }
 
     // Update is called once per frame
     void Update()
