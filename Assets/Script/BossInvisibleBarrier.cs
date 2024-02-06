@@ -71,7 +71,7 @@ public class BossInvisibleBarrier : MonoBehaviour
     {
         if(bossDead)
         {
-            SceneManager.LoadScene("Credits");
+            SceneManager.LoadScene("Creditos");
         }
         else
         {
