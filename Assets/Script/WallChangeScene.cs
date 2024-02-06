@@ -55,6 +55,10 @@ public class WallChangeScene : MonoBehaviour
 
     public void loadSceneFase9()
     {
+        SceneManager.LoadScene("L2P2");
+    }
+    public void loadSceneFase10()
+    {
         SceneManager.LoadScene("L3Boss");
     }
 
@@ -93,6 +97,10 @@ public class WallChangeScene : MonoBehaviour
             if (index == 8)
             {
                 loadSceneFase9();
+            }
+            if (index == 9)
+            {
+                loadSceneFase10();
             }
         }
     }
