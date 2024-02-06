@@ -4999,6 +4999,7 @@ MonoBehaviour:
   spriteNpc: {fileID: 21300000, guid: 4238380c3280dde40b31bf6dd50dc676, type: 3}
   readyToSpeak: 0
   startDialogue: 0
+  firstTime: 1
 --- !u!61 &777179035
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11504,7 +11505,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -32.37146, y: 0}
+  m_Offset: {x: -32.37146, y: 0.035134077}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -11515,7 +11516,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 66.10663, y: 1}
+  m_Size: {x: 66.10663, y: 1.0702682}
   m_EdgeRadius: 0
 --- !u!4 &1808996255
 Transform:

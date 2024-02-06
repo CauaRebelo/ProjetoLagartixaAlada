@@ -9125,8 +9125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueNpc:
-  - "Venha e me encontre, guerreiro.                                                                                        
-    Aperte E para pular o di\xE1logo."
+  - Venha e me encontre, guerreiro.
   dialogueIndex: 0
   dialoguePanel: {fileID: 647615498}
   dialogueText: {fileID: 406751957}
