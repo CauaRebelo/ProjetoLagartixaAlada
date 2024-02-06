@@ -46,7 +46,8 @@ public class InstaDialogoNpc : MonoBehaviour
         startDialogue = false;
         dialogueIndex = 0;
         FindObjectOfType<PlayerMovement>().isDialogueActive = false;
-        FindObjectOfType<PlayerMovement>().speed = 8f; 
+        FindObjectOfType<PlayerMovement>().speed = 8f;
+        EventSystem.current.PlayerFinishTalking();
     }
 }
 

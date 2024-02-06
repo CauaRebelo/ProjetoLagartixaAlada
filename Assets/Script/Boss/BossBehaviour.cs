@@ -621,8 +621,22 @@ public class BossBehaviour : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        StopAllCoroutines();
+        noAttack = true;
+        firstTime = true;
+        phaseDifficulty = 0;
+        this.gameObject.transform.parent.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0f;
+        this.gameObject.transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        this.gameObject.transform.parent.gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0;
+        this.gameObject.GetComponent<Collider2D>().isTrigger = true;
+        bulletArc1.enabled = false;
+        bulletArc2.enabled = false;
+        OnBlink.Invoke(false);
+        OnAttack.Invoke(false);
+        protect.SetActive(false);
+        globalLight.intensity = 0.7f;
+        playerHitbox.SetActive(false);
     }
 }

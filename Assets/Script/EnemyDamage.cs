@@ -168,16 +168,6 @@ public class EnemyDamage : MonoBehaviour
         }
         health = maxHealth;
         rb.gravityScale = gravity;
-        if(multipleTolerance)
-        {
-            firstImmune = true;
-            trueImmune = false;
-            immune = true;
-            falseDeath = true;
-            ChangeElement(3);
-            toleranceStage = 3;
-            this.gameObject.transform.parent.gameObject.SetActive(false);
-        }
         healthBar.gameObject.SetActive(true);
         healthBar.UpdateResourceBar(health, maxHealth);
         broken = false;
@@ -185,7 +175,20 @@ public class EnemyDamage : MonoBehaviour
         resistences = originalresistences;
         Debug.Log("Dying");
         toleranceBar.UpdateResourceBar(tolerance, maxTolerance);
-        enemy.SetActive(true);
+        if(!multipleTolerance)
+        {
+            enemy.SetActive(true);
+        }
+        else
+        {
+            ChangeElement(3);
+            firstImmune = true;
+            trueImmune = false;
+            immune = true;
+            falseDeath = true;
+            toleranceStage = 3;
+            this.gameObject.transform.parent.gameObject.SetActive(false);
+        }
     }
 
     public void ChangeElement(int val)

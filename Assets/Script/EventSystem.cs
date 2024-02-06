@@ -31,6 +31,15 @@ public class EventSystem : MonoBehaviour
         }
     }
 
+    public event Action onPlayerFinishTalking;
+    public void PlayerFinishTalking()
+    {
+        if (onPlayerFinishTalking != null)
+        {
+            onPlayerFinishTalking();
+        }
+    }
+
     public event Action onBossElementeChange;
     public void BossElementeChange()
     {
