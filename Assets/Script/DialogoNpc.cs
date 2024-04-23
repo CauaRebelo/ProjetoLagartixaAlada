@@ -11,7 +11,6 @@ public class DialogoNpc : MonoBehaviour
     public GameObject dialoguePanel;
     public Text dialogueText;
 
-    public Text nameNpc;
     public Image imageNpc;
     public Sprite spriteNpc;
 
@@ -51,7 +50,6 @@ public class DialogoNpc : MonoBehaviour
     }
 
     void StartDialogue(){
-        nameNpc.text = "NPC";
         imageNpc.sprite = spriteNpc;
         startDialogue = true;
         dialogueIndex = 0;

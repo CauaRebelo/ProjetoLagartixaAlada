@@ -219,6 +219,7 @@ RectTransform:
   m_Children:
   - {fileID: 1587007092}
   - {fileID: 130535975}
+  - {fileID: 851861901}
   - {fileID: 754408057}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -418,7 +419,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "CAMINHO DO DRAG\xC3O"
+  m_text: OBRIGADO POR JOGAR
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6c5a4f31ab55366498fbc94a10712831, type: 2}
   m_sharedMaterial: {fileID: -9079610349376507483, guid: 6c5a4f31ab55366498fbc94a10712831, type: 2}
@@ -525,9 +526,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 493912522}
-  - {fileID: 851861901}
   - {fileID: 496145459}
+  - {fileID: 493912522}
   m_Father: {fileID: 754408057}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -590,7 +590,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &493912522
 RectTransform:
   m_ObjectHideFlags: 0
@@ -725,7 +725,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &496145459
 RectTransform:
   m_ObjectHideFlags: 0
@@ -733,7 +733,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 496145458}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -943,17 +943,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 851861900}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 96974921}
-  m_Father: {fileID: 348824914}
+  m_Father: {fileID: 94222142}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 350, y: -250}
+  m_AnchoredPosition: {x: -0.000030518, y: -257}
   m_SizeDelta: {x: 460, y: 85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &851861902

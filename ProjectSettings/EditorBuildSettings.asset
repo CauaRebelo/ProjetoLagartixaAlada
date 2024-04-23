@@ -56,4 +56,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/L2P1.unity
     guid: 6868de72bc5d2e4468b05c04163f6f86
+  - enabled: 1
+    path: Assets/Scenes/L3Boss.unity
+    guid: 6e2684a284d604d4aa19b2e90adb0a24
+  - enabled: 1
+    path: Assets/Scenes/Creditos.unity
+    guid: 24968dff1b3f6a04f9cc34f4e8692909
   m_configObjects: {}
