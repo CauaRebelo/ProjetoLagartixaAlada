@@ -37,6 +37,13 @@ public class PlayerAttack : MonoBehaviour
             playerMovement.canAttack = true;
             playerMovement.hitEnemy = true;
         }
+        if(col.gameObject.tag == "Wall")
+        {
+            col.gameObject.GetComponent<ElementalWallBehaviour>().Damage(playerMovement.enchantment, attackDamage * playerMovement.damage);
+            playerMovement.isAbleToAct = true;
+            playerMovement.canAttack = true;
+            playerMovement.hitEnemy = true;
+        }
     }
 
 }

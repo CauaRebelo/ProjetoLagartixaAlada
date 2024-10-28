@@ -30,9 +30,12 @@ public class StatusAttack : MonoBehaviour
         {
             if(isReady)
             {
-                col.gameObject.GetComponent<StatusEffects>().HandleStatusEffect(debuff, effectVariable1, effectVariable2);
-                isReady = false;
-                StartCoroutine(Cooldown());
+                if(col.gameObject.GetComponent<StatusEffects>() != null)
+                {
+                    col.gameObject.GetComponent<StatusEffects>().HandleStatusEffect(debuff, effectVariable1, effectVariable2);
+                    isReady = false;
+                    StartCoroutine(Cooldown());
+                }
             }
         }
     }
