@@ -10,6 +10,7 @@ TagManager:
   - Music
   - BulletHell
   - GlobalLight
+  - Wall
   layers:
   - Default
   - TransparentFX
